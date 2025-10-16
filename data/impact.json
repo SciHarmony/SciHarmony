@@ -1,1 +1,14 @@
-{"students_served":58,"contact_hours":312,"volunteers_trained":15}
+{
+  "kits_distributed": 48,
+  "preparedness_pre": 2.1,
+  "preparedness_post": 4.0,
+  "mirror_tolerance_change_seconds": 85,
+  "ortho_sessions": 6,
+  "students_served": 62,
+  "volunteers_trained": 14,
+  "sessions": [
+    { "date": "2025-09-28", "program": "Clinic-Prep", "site": "Eastside Library", "students": 10, "outcome": "Preparedness 2.0→3.8" },
+    { "date": "2025-10-03", "program": "Ortho Lab", "site": "Roosevelt HS", "students": 18, "outcome": "Team RMSE −34%" },
+    { "date": "2025-10-10", "program": "Clinic-Prep", "site": "Westview MS", "students": 12, "outcome": "+65s mirror tolerance" }
+  ]
+}
