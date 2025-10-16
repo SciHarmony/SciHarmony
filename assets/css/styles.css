@@ -53,7 +53,7 @@ img{max-width:100%;height:auto;display:block}
   /* 3 stacked backgrounds: ribbons, tiled icons, deep gradient */
   background:
     url('../images/hero-fg.svg') center / cover no-repeat,
-    url('../images/hero-icons-tile.svg') center / 420px 420px repeat,
+    url('../images/hero-icons-tile.svg') center / 560px 560px repeat,
     url('../images/hero-bg.svg') center / cover no-repeat;
 
   /* desktop parallax feel */
@@ -81,7 +81,7 @@ img{max-width:100%;height:auto;display:block}
 }
 .hero p.sub{
   font-size:clamp(18px,2.2vw,24px);
-  opacity:.95;
+  opacity:.14;
   margin:0 auto 22px;
   max-width:48ch;
 }
