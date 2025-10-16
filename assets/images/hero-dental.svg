@@ -4,38 +4,11 @@
       <stop offset="0" stop-color="#0e3b2e"/>
       <stop offset="1" stop-color="#1C7C54"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0.25" cy="0.25" r="0.8">
-      <stop offset="0" stop-color="#69C39B" stop-opacity=".35"/>
-      <stop offset="1" stop-color="#69C39B" stop-opacity="0"/>
-    </radialGradient>
   </defs>
-
-  <!-- green gradient base + soft glow -->
   <rect width="2000" height="900" fill="url(#bg)"/>
-  <circle cx="520" cy="260" r="520" fill="url(#glow)"/>
-
-  <!-- subtle archwire curves -->
   <g fill="none" stroke="#69C39B" stroke-opacity=".28" stroke-width="6">
     <path d="M0 720 C260 650 520 790 780 720 S1300 650 1560 720 S2000 790 2000 790"/>
     <path d="M0 540 C300 490 600 600 900 540 S1500 490 2000 540"/>
     <path d="M0 360 C280 320 560 380 840 360 S1400 330 2000 370"/>
-  </g>
-
-  <!-- tooth with brackets as a faint watermark on the right -->
-  <g transform="translate(1380 250) scale(1.1)" opacity=".16" stroke="#E8F5EF" stroke-width="14" fill="none">
-    <path d="M160 20c36 0 62 26 62 64 0 22-7 34-15 51-4 8-13 26-18 26-7 0-11-14-18-28-4-9-8-13-11-13s-7 4-11 13c-7 14-11 28-18 28-5 0-14-18-18-26-8-17-15-29-15-51 0-38 26-64 62-64z"/>
-    <path d="M88 108 C130 90 190 90 232 108"/>
-    <rect x="110" y="102" width="20" height="20" rx="4"/>
-    <rect x="150" y="98"  width="20" height="20" rx="4"/>
-    <rect x="190" y="102" width="20" height="20" rx="4"/>
-  </g>
-
-  <!-- tiny molecule hint on left -->
-  <g stroke="#B6F0D0" stroke-width="6" stroke-linecap="round" opacity=".45">
-    <circle cx="160" cy="160" r="12" fill="#B6F0D0"/>
-    <circle cx="210" cy="190" r="10" fill="#B6F0D0"/>
-    <circle cx="130" cy="200" r="10" fill="#B6F0D0"/>
-    <line x1="160" y1="160" x2="210" y2="190"/>
-    <line x1="160" y1="160" x2="130" y2="200"/>
   </g>
 </svg>

@@ -6,10 +6,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     if(!res.ok) return;
     const data = await res.json();
     const items = [
-      ['Students served', data.students_served||0],
-      ['Contact hours', data.contact_hours||0],
-      ['Volunteers trained', data.volunteers_trained||0]
+      ['Clinic-prep kits', data.kits_distributed],
+      ['Preparedness (pre→post)', (data.preparedness_pre + '→' + data.preparedness_post)],
+      ['Mirror-tolerance change', (data.mirror_tolerance_change_seconds>0?'+':'') + data.mirror_tolerance_change_seconds + 's'],
+      ['Ortho Lab sessions', data.ortho_sessions],
+      ['Students served', data.students_served],
+      ['Volunteers trained', data.volunteers_trained]
     ];
-    el.innerHTML = items.map(([k,v])=>`<div class="kpi"><div class="num">${v}</div><div class="lbl">${k}</div></div>`).join('');
+    el.innerHTML = items.map(([k,v])=>`<div class="kpi"><div class="num">${v ?? '—'}</div><div class="lbl">${k}</div></div>`).join('');
   }catch(e){}
 });

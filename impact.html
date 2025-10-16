@@ -1,104 +1,96 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Impact — SciHarmony</title>
-  <meta name="description" content="Impact metrics for SciHarmony Clinic-Prep and Ortho Lab."/>
-  <link rel="icon" href="assets/logo/favicon-sciharmony-dental-green.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="assets/css/styles.css"/>
-  <style>
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0}
-    .tile{border:1px solid #e5e7eb;border-radius:16px;padding:16px;background:#fff}
-    .tile .num{font-size:28px;font-weight:700}
-    .tile .lbl{font-size:14px;color:#475569}
-    table{width:100%;border-collapse:collapse;margin-top:16px}
-    th,td{border-bottom:1px solid #e5e7eb;padding:10px 8px;text-align:left}
-    th{font-size:14px;color:#475569;font-weight:600}
-    .note{font-size:13px;color:#475569}
-  </style>
+  <meta name="description" content="SciHarmony — Clinic-Prep and Ortho Lab: inclusive dental STEM." />
+  <link rel="icon" href="assets/logo/favicon-sciharmony-dental-green.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  
+<style>
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0}
+.tile{border:1px solid #e5e7eb;border-radius:16px;padding:16px;background:#fff}
+.tile .num{font-size:28px;font-weight:700}
+.tile .lbl{font-size:14px;color:#475569}
+table{width:100%;border-collapse:collapse;margin-top:16px}
+th,td{border-bottom:1px solid #e5e7eb;padding:10px 8px;text-align:left}
+th{font-size:14px;color:#475569;font-weight:600}
+.note{font-size:13px;color:#475569}
+</style>
+
 </head>
 <body>
 
-<header class="header">
-  <div class="navwrap">
-    <a class="brand" href="index.html" aria-label="SciHarmony home">
-      <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="SciHarmony logo" width="40" height="40"/>
-      <span>SciHarmony</span>
-    </a>
-    <nav class="nav" aria-label="primary">
-      <a href="clinic-prep.html">Clinic-Prep</a>
-      <a href="ortho-lab.html">Ortho Lab</a>
-      <a href="downloads.html">Downloads</a>
-      <a href="impact.html" aria-current="page">Impact</a>
-      <a class="btn primary" href="get-involved.html#donate">Donate</a>
-    </nav>
-  </div>
+<header class="site-header">
+  <a class="brand" href="index.html" aria-label="SciHarmony home">
+    <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="SciHarmony logo" width="40" height="40" />
+    <span class="brand-text">SciHarmony</span>
+  </a>
+  <nav class="nav" aria-label="primary">
+    <a href="clinic-prep.html">Clinic-Prep</a>
+    <a href="ortho-lab.html">Ortho Lab</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="impact.html" aria-current="page">Impact</a>
+    <a href="accessibility.html">Accessibility</a>
+    <a href="press-kit.html">Press</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn donate" href="get-involved.html#donate">Donate</a>
+  </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
 </header>
 
-<section class="section">
-  <div class="container">
-    <h1>Impact</h1>
-    <p>We track a few boring-but-real numbers so this isn’t just vibes.</p>
+<main id="main" class="container">
 
-    <!-- KPI tiles populated from data/impact.json -->
-    <div id="kpis" class="grid" aria-live="polite">
-      <!-- tiles render here -->
+<h1>Impact</h1>
+<p>We track a few boring-but-real numbers so this isn’t just vibes.</p>
+<div id="kpis" class="grid" aria-live="polite"></div>
+<h2>Recent sessions</h2>
+<table id="sessions">
+  <thead><tr><th>Date</th><th>Program</th><th>Site</th><th>Students</th><th>Key outcome</th></tr></thead>
+  <tbody></tbody>
+</table>
+<script>
+fetch('data/impact.json').then(r=>r.ok?r.json():Promise.reject(r.status)).then(data=>{
+  const k = [
+    ["Clinic-prep kits distributed", data.kits_distributed],
+    ["Preparedness (pre→post)", data.preparedness_pre + "→" + data.preparedness_post],
+    ["Mirror-tolerance change", (data.mirror_tolerance_change_seconds>0?"+":"") + data.mirror_tolerance_change_seconds + "s"],
+    ["Ortho Lab sessions", data.ortho_sessions],
+    ["Students served", data.students_served],
+    ["Volunteers trained", data.volunteers_trained]
+  ];
+  document.getElementById('kpis').innerHTML = k.map(([lbl,num]) =>
+    `<div class="tile"><div class="num">${num ?? "—"}</div><div class="lbl">${lbl}</div></div>`
+  ).join('');
+  const tbody = document.querySelector('#sessions tbody');
+  tbody.innerHTML = (data.sessions||[]).map(s => `
+    <tr><td>${s.date||""}</td><td>${s.program||""}</td><td>${s.site||""}</td><td>${s.students||""}</td><td>${s.outcome||""}</td></tr>
+  `).join('') || `<tr><td colspan="5" class="note">Add entries to <code>data/impact.json</code>.</td></tr>`;
+}).catch(_=>{
+  document.getElementById('kpis').innerHTML = '<div class="tile"><div class="num">?</div><div class="lbl">Could not load data/impact.json</div></div>';
+});
+</script>
+<p class="small">Education and preparation only. Any clinical services are performed by licensed providers under their consent and paperwork.</p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div><strong>SciHarmony</strong><br/>Clinic-Prep & Ortho Lab — inclusive dental STEM</div>
+    <div>
+      <a href="mailto:hello@sciharmony.org">hello@sciharmony.org</a><br/>
+      <a href="privacy.html">Privacy</a>
     </div>
-
-    <h2>Recent sessions</h2>
-    <table id="sessions">
-      <thead>
-        <tr>
-          <th>Date</th><th>Program</th><th>Site</th><th>Students</th><th>Key outcome</th>
-        </tr>
-      </thead>
-      <tbody><!-- rows render here --></tbody>
-    </table>
-
-    <p class="note">Education and preparation only. Any clinical services are performed by licensed providers under their consent and paperwork.</p>
+    <div class="socials">
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="LinkedIn">LinkedIn</a>
+      <a href="#" aria-label="YouTube">YouTube</a>
+    </div>
   </div>
-</section>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="small">© 2025 SciHarmony — Clinic-Prep & Ortho Lab</div>
-  </div>
+  <p class="copyright">© 2025 SciHarmony. Made with students.</p>
 </footer>
 
-<script>
-  // Load metrics + sessions from JSON
-  fetch('data/impact.json')
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
-    .then(data => {
-      const kpis = [
-        ["Clinic-prep kits distributed", data.kits_distributed],
-        ["Preparedness (pre→post)", data.preparedness_pre + "→" + data.preparedness_post],
-        ["Mirror-tolerance change", (data.mirror_tolerance_change_seconds>0?"+":"") + data.mirror_tolerance_change_seconds + "s"],
-        ["Ortho Lab sessions", data.ortho_sessions],
-        ["Students served", data.students_served],
-        ["Volunteers trained", data.volunteers_trained]
-      ];
-      document.getElementById('kpis').innerHTML = kpis.map(([lbl,num]) =>
-        `<div class="tile"><div class="num">${num ?? "—"}</div><div class="lbl">${lbl}</div></div>`
-      ).join('');
-
-      const tbody = document.querySelector('#sessions tbody');
-      tbody.innerHTML = (data.sessions||[]).map(s => `
-        <tr>
-          <td>${s.date||""}</td>
-          <td>${s.program||""}</td>
-          <td>${s.site||""}</td>
-          <td>${s.students||""}</td>
-          <td>${s.outcome||""}</td>
-        </tr>
-      `).join('') || `<tr><td colspan="5" class="note">Add entries to <code>data/impact.json</code> to populate this table.</td></tr>`;
-    })
-    .catch(_ => {
-      document.getElementById('kpis').innerHTML =
-        '<div class="tile"><div class="num">?</div><div class="lbl">Could not load data/impact.json</div></div>';
-    });
-</script>
-
+<script src="assets/js/app.js" defer></script>
 </body>
 </html>
