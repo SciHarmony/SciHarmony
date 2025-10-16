@@ -16,3 +16,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     el.innerHTML = items.map(([k,v])=>`<div class="kpi"><div class="num">${v ?? '—'}</div><div class="lbl">${k}</div></div>`).join('');
   }catch(e){}
 });
+// Parallax nudge for layered hero
+(function(){
+  const hero = document.querySelector('.hero');
+  if(!hero) return;
+  const midSpeed = 0.25, fgSpeed = 0.12;
+  function onScroll(){
+    const y = window.scrollY || 0;
+    hero.style.backgroundPosition =
+      `center ${50 + Math.round(y*fgSpeed)}px, center ${50 + Math.round(y*midSpeed)}px, center 50%`;
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+})();
