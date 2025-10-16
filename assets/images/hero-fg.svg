@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 900" preserveAspectRatio="xMidYMid slice">
+  <g fill="none" stroke="#E8F5EF" stroke-width="18" opacity=".14" transform="translate(1220 150) scale(1.35)">
+    <path d="M160 20c36 0 62 26 62 64 0 22-7 34-15 51-4 8-13 26-18 26-7 0-11-14-18-28-4-9-8-13-11-13s-7 4-11 13c-7 14-11 28-18 28-5 0-14-18-18-26-8-17-15-29-15-51 0-38 26-64 62-64z"/>
+    <path d="M88 108 C130 90 190 90 232 108"/>
+    <rect x="110" y="102" width="20" height="20" rx="4"/>
+    <rect x="150" y="98" width="20" height="20" rx="4"/>
+    <rect x="190" y="102" width="20" height="20" rx="4"/>
+  </g>
+  <!-- archwire ribbons -->
+  <g fill="none" stroke="#69C39B" stroke-opacity=".35" stroke-width="9">
+    <path d="M0 700 C260 630 520 770 780 700 S1300 630 1560 700 S2000 770 2000 770"/>
+    <path d="M0 520 C300 470 600 580 900 520 S1500 470 2000 520"/>
+    <path d="M0 360 C280 320 560 380 840 360 S1400 330 2000 370"/>
+  </g>
+</svg>
