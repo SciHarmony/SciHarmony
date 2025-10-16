@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#0E3B2E"/>
+  <!-- Tooth -->
+  <path d="M32 10c9 0 16 7 16 17c0 6-2 9-4 14c-2 4-4 8-6 8c-2 0-3-4-5-8c-2-4-3-5-5-5s-3 1-5 5c-2 4-3 8-5 8c-2 0-4-4-6-8c-2-5-4-8-4-14c0-10 7-17 16-17z"
+        fill="#FFFFFF"/>
+  <!-- Archwire + brackets -->
+  <path d="M10 40c7-5 27-5 44 0" fill="none" stroke="#69C39B" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#1C7C54">
+    <rect x="18" y="34" width="6" height="6" rx="1.5"/>
+    <rect x="29" y="32" width="6" height="6" rx="1.5"/>
+    <rect x="40" y="34" width="6" height="6" rx="1.5"/>
+  </g>
+</svg>
