@@ -553,3 +553,57 @@ link[rel="icon"] {
 :root[data-motion="reduce"] *{
   animation-duration:.001s !important; animation-iteration-count:1 !important; transition:none !important;
 }
+/* ========= Final Polish Pack (no audio) ========= */
+
+/* Dark mode: brand text white */
+:root[data-theme="dark"] .brand .brand-text { color:#fff; }
+
+/* 1) Hero headline word-by-word entrance */
+.hero h1.split { line-height:1.08; }
+.hero h1.split .word {
+  display:inline-block;
+  opacity:0;
+  transform:translateY(16px);
+  animation: hword .7s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes hword { to { opacity:1; transform:none; } }
+
+/* 2) Page transitions (soft fade between pages) */
+body.page-fade { opacity:1; transition:opacity .25s ease; }
+body.page-fade.out { opacity:0; }
+
+/* 3) Custom cursor ring */
+body { cursor:none; }
+.cursor-ring{
+  position:fixed; left:0; top:0; width:28px; height:28px;
+  border:2px solid rgba(28,124,84,.85);
+  border-radius:999px; pointer-events:none; z-index:99999;
+  transform:translate(-50%,-50%) scale(1);
+  transition: transform .12s ease, opacity .2s ease, border-color .2s ease;
+  mix-blend-mode: multiply;
+  backdrop-filter: blur(2px);
+}
+.cursor-ring.hide{ opacity:0; }
+.cursor-ring.grow{ transform:translate(-50%,-50%) scale(1.35); }
+:root[data-theme="dark"] .cursor-ring{ border-color:rgba(95,211,170,.9); }
+
+/* 4) Section glow border when revealed */
+.section { position:relative; }
+.section.glow-on::before{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  top:-10px; width:min(960px,90%); height:4px; border-radius:4px;
+  background:linear-gradient(90deg,var(--green),var(--green2));
+  filter: blur(6px); opacity:.35;
+}
+
+/* Safety: hide custom cursor on touch devices / users pref */
+@media (hover:none), (pointer:coarse){
+  body { cursor:auto; }
+  .cursor-ring { display:none; }
+}
+
+/* Reduced motion: disable big motions */
+@media (prefers-reduced-motion: reduce){
+  .hero h1.split .word{ animation:none; opacity:1; transform:none; }
+  body.page-fade { transition:none; }
+}
