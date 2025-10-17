@@ -46,15 +46,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-// Parallax Hero (layered background shift)
+// ---- Parallax Hero (CSS-variable drift; plays nice with backgrounds)
 (function () {
   const hero = document.querySelector('.hero');
   if (!hero) return;
-  const midSpeed = 0.25, fgSpeed = 0.12;
+
   function onScroll() {
-    const y = window.scrollY || 0;
-    hero.style.backgroundPosition =
-      `center ${50 + Math.round(y*fgSpeed)}px, center ${50 + Math.round(y*midSpeed)}px, center 50%`;
+    // nudge the tiled dental icons layer a bit
+    hero.style.setProperty('--bg-drift', (window.scrollY * 0.20) + 'px');
   }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -81,7 +80,7 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.18 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+// Page Fade-In
 console.log("SciHarmony app loaded.");
 document.body.classList.add('fade-in');
 window.addEventListener('load', () => document.body.classList.remove('fade-in'));
-
