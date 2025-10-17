@@ -220,3 +220,78 @@ body::after{
   .footer-tagline{font-size:16px}
   .social-icon svg{width:24px; height:24px}
 }
+/* ================= EXPENSIVE-LOOKING POLISH PACK ================= */
+
+/* 1) Glassy navbar */
+.site-header{
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+}
+
+/* 2) Scroll reveal: soft & floaty (works with existing .reveal/.revealed) */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .8s cubic-bezier(0.22, 1, 0.36, 1),
+             transform .8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.revealed{
+  opacity:1;
+  transform:translateY(0);
+}
+/* if the element also has .lift, give it a gentle spring */
+.revealed.lift{
+  animation:floatIn .6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes floatIn{
+  0%{opacity:0; transform:translateY(40px) scale(.98)}
+  100%{opacity:1; transform:translateY(0) scale(1)}
+}
+
+/* 3) Hero: animated gradient overlay + background drift slot */
+.hero{
+  /* allow JS to nudge tiled icons slightly on scroll */
+  --bg-drift: 0px;
+  background-position:
+     center 0,                         /* fg */
+     center calc(50% + var(--bg-drift)), /* tiled dental icons */
+     center 0;                         /* deep bg */
+}
+/* replace static overlay with a slow-moving gradient shimmer */
+.hero::after{
+  background:
+    linear-gradient(120deg, rgba(0,0,0,.40), rgba(0,0,0,.70)),
+    linear-gradient(270deg, rgba(28,124,84,.40), rgba(105,195,155,.40));
+  background-size: 200% 200%;
+  animation: heroGradientMove 20s ease infinite;
+}
+@keyframes heroGradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* 4) Button focus glow (keyboard users deserve nice things) */
+.btn:focus-visible{
+  outline: 3px solid var(--green2);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(105,195,155,0.25);
+}
+
+/* 5) Footer: barely-there breathing effect */
+@keyframes footerPulse{
+  0%,100%{ filter:brightness(1) }
+  50%{ filter:brightness(1.08) }
+}
+.site-footer{ animation: footerPulse 12s ease-in-out infinite }
+
+/* 6) Optional: gradient headline. Add class="fancy-title" to <h1> to enable. */
+.fancy-title{
+  background: linear-gradient(90deg, var(--green2), #bfffe5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:text;
+  color:transparent;
+}
