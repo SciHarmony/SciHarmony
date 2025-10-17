@@ -628,3 +628,23 @@ body.page-fade.out { opacity:0; }
   pointer-events:none; opacity:0;
 }
 .btn:active::after{ width:260px; height:260px; opacity:.55; }
+/* Restore native cursor and keep the ring overlay */
+body { cursor: auto !important; }
+
+/* keep the ring functional */
+.cursor-ring{
+  position:fixed; left:0; top:0; width:28px; height:28px;
+  border:2px solid rgba(28,124,84,.85);
+  border-radius:999px; pointer-events:none; z-index:99999;
+  transform:translate(-50%,-50%) scale(1);
+  transition: transform .12s ease, opacity .2s ease, border-color .2s ease;
+  mix-blend-mode:multiply; backdrop-filter:blur(2px);
+}
+.cursor-ring.hide{ opacity:0; }
+.cursor-ring.grow{ transform:translate(-50%,-50%) scale(1.35); }
+:root[data-theme="dark"] .cursor-ring{ border-color:rgba(95,211,170,.9); }
+
+/* still hide the ring on touch devices */
+@media (hover:none), (pointer:coarse){
+  .cursor-ring{ display:none; }
+}
