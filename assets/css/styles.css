@@ -363,3 +363,44 @@ html {
 link[rel="icon"] {
   animation: faviconPulse 5s linear infinite;
 }
+/* ============ Aesthetic Bundle: particles, headings, hero intro, footer bar ============ */
+
+/* 2) Section headings: soft brand underline */
+.section h1, .section h2{
+  position:relative;
+  display:inline-block;
+}
+.section h1::after, .section h2::after{
+  content:"";
+  position:absolute; left:0; bottom:-6px;
+  width:100%; height:3px; border-radius:2px;
+  background:linear-gradient(90deg,var(--green),var(--green2));
+  opacity:.35;
+}
+
+/* 5) Hero intro micro-motion (pairs with JS page load) */
+.hero-inner{
+  opacity:0; transform:translateY(20px);
+  animation:heroIntro .8s cubic-bezier(0.22,1,0.36,1) .25s forwards;
+}
+@keyframes heroIntro{ to{ opacity:1; transform:none; } }
+
+/* 1) Hero particles canvas layer (JS injects the canvas) */
+#heroParticles{
+  position:absolute; inset:0;
+  z-index:0;              /* behind overlay and text */
+  pointer-events:none;
+}
+
+/* 6) Footer progress bar */
+#footer-progress{
+  position:fixed; bottom:0; left:0; height:3px; width:0;
+  background:linear-gradient(90deg,var(--green2),var(--green));
+  box-shadow:0 0 8px rgba(0,0,0,.15);
+  z-index:9999;
+}
+
+/* Motion safety */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001s !important; animation-iteration-count:1 !important; transition:none !important }
+}
