@@ -221,7 +221,7 @@ img{max-width:100%;height:auto;display:block}
 }
 
 /* dropdown links also black; no underline on hover */
-.dropdown a{ color:#0e0e0e; }
+.dropdown a{ color:#ffffff; }
 .dropdown a:hover{ color:var(--green); text-decoration:none; }
 
 /* belt-and-suspenders: never underline header links on hover */
