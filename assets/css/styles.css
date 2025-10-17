@@ -607,3 +607,15 @@ body { cursor:none; }
   .hero h1.split .word{ animation:none; opacity:1; transform:none; }
   body.page-fade { transition:none; }
 }
+/* Fix hero word spacing */
+.hero h1.split{ white-space: normal; }
+.hero h1.split .word{
+  display:inline-block;
+  margin-right:.25em;          /* visual space between words */
+  opacity:0;
+  transform:translateY(16px);
+  animation: hword .7s cubic-bezier(.22,1,.36,1) forwards;
+}
+.hero h1.split .word:last-child{ margin-right:0; }
+
+@keyframes hword { to { opacity:1; transform:none; } }
