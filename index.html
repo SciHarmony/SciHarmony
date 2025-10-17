@@ -5,20 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SciHarmony — Clinic-Prep & Ortho Lab (Inclusive Dental STEM)</title>
   <meta name="description" content="Sensory-aware clinic-prep tools and orthodontic biomechanics labs so students can practice first and show up prepared." />
+
+  <!-- Favicon -->
   <link rel="icon" href="assets/logo/favicon-sciharmony-dental-green.svg" type="image/svg+xml" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
 
 <header class="site-header">
   <a class="brand" href="index.html" aria-label="SciHarmony home">
-    <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="SciHarmony logo" width="40" height="40" />
+    <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="" width="56" height="56" />
     <span class="brand-text">SciHarmony</span>
   </a>
 
   <nav class="nav main-nav" aria-label="primary">
     <ul class="menu" role="menubar">
-
       <li class="has-dropdown" role="none">
         <a role="menuitem" aria-haspopup="true" aria-expanded="false">About</a>
         <div class="dropdown" role="menu" aria-label="About">
@@ -28,7 +34,6 @@
           <a href="contact.html" role="menuitem">Contact</a>
         </div>
       </li>
-
       <li class="has-dropdown" role="none">
         <a role="menuitem" aria-haspopup="true" aria-expanded="false">Programs</a>
         <div class="dropdown" role="menu" aria-label="Programs">
@@ -37,7 +42,6 @@
           <a href="downloads.html" role="menuitem">Downloads</a>
         </div>
       </li>
-
       <li class="has-dropdown" role="none">
         <a role="menuitem" aria-haspopup="true" aria-expanded="false">Get Involved</a>
         <div class="dropdown" role="menu" aria-label="Get Involved">
@@ -46,11 +50,9 @@
           <a href="get-involved.html#donate" role="menuitem">Donate</a>
         </div>
       </li>
-
       <li role="none"><a role="menuitem" href="impact.html">Impact</a></li>
       <li role="none"><a role="menuitem" href="accessibility.html">Accessibility</a></li>
       <li role="none"><a role="menuitem" class="btn donate" href="get-involved.html#donate">Donate</a></li>
-
     </ul>
   </nav>
 
@@ -58,7 +60,7 @@
 </header>
 
 <section class="hero" role="banner">
-  <div class="hero-inner">
+  <div class="hero-inner animate-fadeUp">
     <div class="small" style="opacity:.85">SciHarmony</div>
     <h1>Inclusive dental STEM that feels calm, clear, and hands-on.</h1>
     <p class="sub">
@@ -73,30 +75,37 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="cards">
-      <div class="card">
-        <h3>Clinic-Prep Kits</h3>
-        <p>Visual schedules, AAC dental boards, quiet-hour scripts, and tool rehearsals at low volume.</p>
-      </div>
-      <div class="card">
-        <h3>Ortho Lab</h3>
-        <p>Brackets, wires, elastics, spring scales. Predict, measure, reduce error.</p>
-      </div>
-      <div class="card">
-        <h3>Partner Clinics</h3>
-        <p>Sensory-friendly tours and checklists co-designed with licensed providers.</p>
-      </div>
-    </div>
-  </div>
+<section class="mission">
+  <p>Every student deserves a calm, hands-on start in science and care.</p>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="kpis" id="impact-counters" aria-live="polite"></div>
-  </div>
-</section>
+<main id="main">
+  <section class="section">
+    <div class="container reveal">
+      <div class="cards">
+        <div class="card lift">
+          <h3>Clinic-Prep Kits</h3>
+          <p>Visual schedules, AAC dental boards, quiet-hour scripts, and tool rehearsals at low volume.</p>
+        </div>
+        <div class="card lift">
+          <h3>Ortho Lab</h3>
+          <p>Brackets, wires, elastics, spring scales. Predict, measure, reduce error.</p>
+        </div>
+        <div class="card lift">
+          <h3>Partner Clinics</h3>
+          <p>Sensory-friendly tours and checklists co-designed with licensed providers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container reveal">
+      <h2 class="visually-hidden">Impact at a glance</h2>
+      <div class="kpis" id="impact-counters" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
 
 <footer class="site-footer">
   <div class="footer-main">
@@ -125,3 +134,58 @@
   </div>
 </footer>
 
+<!-- Scripts -->
+<script src="assets/js/app.js" defer></script>
+<script>
+  // Parallax nudge for hero layers (mobile-friendly)
+  (function(){
+    const hero = document.querySelector('.hero');
+    if(!hero) return;
+    const midSpeed = 0.25, fgSpeed = 0.12;
+    function onScroll(){
+      const y = window.scrollY || 0;
+      hero.style.backgroundPosition =
+        `center ${50 + Math.round(y*fgSpeed)}px, center ${50 + Math.round(y*midSpeed)}px, center 50%`;
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive:true });
+  })();
+
+  // Reveal on scroll
+  const onReveal = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('revealed'); onReveal.unobserve(e.target); }
+    });
+  },{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(el=>onReveal.observe(el));
+
+  // KPIs count-up (if you populate data/impact.json)
+  fetch('data/impact.json').then(r=>r.ok?r.json():null).then(data=>{
+    if(!data) return;
+    const stats = [
+      ["Clinic-prep kits distributed", data.kits_distributed || 0],
+      ["Preparedness (pre→post)", (data.preparedness_pre||0) + "→" + (data.preparedness_post||0)],
+      ["Mirror-tolerance change", ((data.mirror_tolerance_change_seconds||0)>0?"+":"") + (data.mirror_tolerance_change_seconds||0) + "s"],
+      ["Ortho Lab sessions", data.ortho_sessions || 0],
+      ["Students served", data.students_served || 0],
+      ["Volunteers trained", data.volunteers_trained || 0]
+    ];
+    const wrap = document.getElementById('impact-counters');
+    wrap.innerHTML = stats.map(([lbl,val])=>`
+      <div class="kpi lift">
+        <div class="num" data-target="${parseInt(val,10)||0}">${/^\d+$/.test(String(val))?0:val}</div>
+        <div class="lbl">${lbl}</div>
+      </div>`).join('');
+    // animate pure-number tiles
+    const nums = wrap.querySelectorAll('.num');
+    nums.forEach(n=>{
+      const target = parseInt(n.dataset.target,10);
+      if(isNaN(target)) return;
+      let cur = 0; const step = Math.max(1, Math.round(target/60));
+      const tick = ()=>{ cur = Math.min(target, cur+step); n.textContent = cur; if(cur<target) requestAnimationFrame(tick); };
+      tick();
+    });
+  }).catch(()=>{});
+</script>
+</body>
+</html>
