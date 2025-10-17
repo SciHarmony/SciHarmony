@@ -29,3 +29,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   onScroll();
   window.addEventListener('scroll', onScroll, { passive:true });
 })();
+// Update aria-expanded on hover/focus for dropdowns
+document.querySelectorAll('.main-nav .has-dropdown > a').forEach(link=>{
+  const li = link.parentElement;
+  function set(expanded){ link.setAttribute('aria-expanded', expanded ? 'true':'false'); }
+  li.addEventListener('mouseenter', ()=>set(true));
+  li.addEventListener('mouseleave', ()=>set(false));
+  link.addEventListener('focus', ()=>set(true));
+  li.addEventListener('focusout', (e)=>{ if(!li.contains(e.relatedTarget)) set(false); });
+});
