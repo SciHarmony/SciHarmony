@@ -1,4 +1,4 @@
-/* ================= SciHarmony Styles ================= */
+/* ================= SciHarmony Styles (Deluxe) ================= */
 :root{
   --green:#1C7C54;
   --green2:#69C39B;
@@ -6,17 +6,31 @@
   --muted:#475569;
 }
 
-*{box-sizing:border-box}
+/* Page entrance fade (paired with body.loaded in JS) */
 html,body{margin:0}
 body{
   font-family:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   color:var(--ink);
   background:#fff;
   line-height:1.6;
+  opacity:0;                    /* will fade to 1 when .loaded is added */
+  transition:opacity .6s ease;
 }
+body.loaded{ opacity:1; }
+
+*{box-sizing:border-box}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--green);text-decoration:none}
 a:hover{text-decoration:underline}
+
+/* Subtle dotted grid backdrop for a lab/tech vibe */
+body::after{
+  content:"";
+  position:fixed; inset:0; z-index:-1;
+  background-image: radial-gradient(rgba(28,124,84,.06) 1px, transparent 1px);
+  background-size:22px 22px;
+  pointer-events:none;
+}
 
 /* Focus styles (accessibility) */
 :focus-visible{outline:3px solid #69C39B; outline-offset:2px; border-radius:8px}
@@ -68,28 +82,45 @@ a:hover{text-decoration:underline}
   padding:10px 16px; border-radius:12px; border:1px solid #e5e7eb; background:#fff;
   transition:transform .12s ease, box-shadow .12s ease;
 }
-.btn.primary,.btn.donate{background:var(--green); border-color:var(--green); color:#fff !important; text-transform:uppercase; letter-spacing:.03em}
+.btn.primary,.btn.donate{
+  background:var(--green); border-color:var(--green); color:#fff !important; text-transform:uppercase; letter-spacing:.03em
+}
 .btn:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.08)}
+
+/* Deluxe: glowier primary hover */
+.btn.primary:hover{
+  box-shadow:0 0 0 3px rgba(105,195,155,.25), 0 10px 22px rgba(28,124,84,.25);
+  transform:translateY(-2px);
+}
+
 .skip-link{position:absolute; left:-9999px}
 .skip-link:focus{left:12px; top:12px; background:#000; color:#fff; padding:8px 10px; z-index:999; border-radius:8px}
 
-/* ================= Hero (dental, layered, parallax-ready) ================= */
+/* ================= Hero (layered + micro-anim) ================= */
 .hero{
   min-height:62vh; display:grid; place-items:center; text-align:center;
   color:#fff; position:relative; overflow:hidden;
-  /* You can use layered images or swap to a single hero if you want */
   background:
     url('../images/hero-fg.svg') center / cover no-repeat,
     url('../images/hero-icons-tile.svg') center / 420px 420px repeat,
     url('../images/hero-bg.svg') center / cover no-repeat;
   background-attachment: scroll, fixed, fixed;
 }
+
+/* Faint rotating icon behind everything for subtle motion */
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:0;
+  background:url('../images/hero-dental.svg') center/60% no-repeat;
+  opacity:.06; animation:spin 60s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
 .hero::after{
-  content:""; position:absolute; inset:0;
+  content:""; position:absolute; inset:0; z-index:1;
   background:linear-gradient(to bottom, rgba(0,0,0,.24), rgba(0,0,0,.62));
   pointer-events:none;
 }
-.hero-inner{position:relative; padding:88px 16px; max-width:980px; z-index:1}
+.hero-inner{position:relative; padding:88px 16px; max-width:980px; z-index:2}
 .hero h1{
   font-size:clamp(42px,6.4vw,76px); font-weight:800; font-family:'Manrope', sans-serif;
   letter-spacing:.01em; margin:.1em auto .25em; max-width:18ch;
@@ -107,7 +138,13 @@ a:hover{text-decoration:underline}
 
 /* ================= Sections / Cards ================= */
 .section{padding:64px 16px}
-.section.alt{background:#f8fbf9}
+.section.alt{
+  background:#f8fbf9;
+  /* Deluxe: soft rounded seam into this section */
+  border-radius:60px 60px 0 0;
+  margin-top:-40px;
+  padding-top:80px;
+}
 .container{max-width:1100px; margin:0 auto; padding:0 16px}
 
 .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:12px}
@@ -127,7 +164,13 @@ a:hover{text-decoration:underline}
 
 /* Reveal on scroll */
 .reveal{opacity:0; transform:translateY(26px); transition:opacity .4s ease, transform .4s ease}
+/* Deluxe: nicer float-in for items that also have .lift */
 .revealed{opacity:1; transform:translateY(0)}
+.revealed.lift{ animation: floatIn .6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes floatIn{
+  0%{ opacity:0; transform:translateY(40px) scale(.98); }
+  100%{ opacity:1; transform:translateY(0) scale(1); }
+}
 
 /* ================= Gradient Footer (shimmer) ================= */
 .site-footer{
@@ -149,8 +192,9 @@ a:hover{text-decoration:underline}
 .footer-title{font-size:36px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; margin:0; font-family:'Manrope', sans-serif}
 .footer-tagline{font-size:18px; opacity:.92; margin:0}
 .footer-socials{display:flex; gap:26px; justify-content:center; margin-top:16px}
+/* Deluxe: perkier icon hover */
+.footer-socials a:hover svg{transform:translateY(-4px) scale(1.1); opacity:.9}
 .social-icon svg{transition:transform .2s ease, opacity .2s ease}
-.social-icon:hover svg{transform:scale(1.15); opacity:.85}
 .footer-copy{margin-top:30px; font-size:14px; opacity:.85}
 
 /* Utilities */
