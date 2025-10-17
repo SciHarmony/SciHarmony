@@ -1,93 +1,98 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>About — SciHarmony</title>
+  <meta name="description" content="Learn about SciHarmony — inclusive dental STEM through Clinic-Prep and Ortho Lab."/>
   <link rel="icon" href="assets/logo/favicon-sciharmony-dental-green.svg" type="image/svg+xml"/>
   <link rel="stylesheet" href="assets/css/styles.css"/>
+  <meta name="theme-color" content="#ffffff"/>
 </head>
 <body>
-<header class="site-header">
-  <a class="brand" href="index.html" aria-label="SciHarmony home">
-    <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="" width="40" height="40"/>
-    <span class="brand-text">SciHarmony</span>
-  </a>
-  <!-- paste the dropdown nav here -->
-  <nav class="nav main-nav" aria-label="primary">
-    <ul class="menu" role="menubar">
-      <li class="has-dropdown" role="none">
-        <a role="menuitem" aria-haspopup="true" aria-expanded="false">About</a>
-        <div class="dropdown" role="menu" aria-label="About">
-          <a href="about.html" role="menuitem">About Us</a>
-          <a href="faq.html" role="menuitem">FAQ</a>
-          <a href="press-kit.html" role="menuitem">Press Kit</a>
-          <a href="contact.html" role="menuitem">Contact</a>
-        </div>
-      </li>
-      <li class="has-dropdown" role="none">
-        <a role="menuitem" aria-haspopup="true" aria-expanded="false">Programs</a>
-        <div class="dropdown" role="menu" aria-label="Programs">
-          <a href="clinic-prep.html" role="menuitem">Clinic-Prep</a>
-          <a href="ortho-lab.html" role="menuitem">Ortho Lab</a>
-          <a href="downloads.html" role="menuitem">Downloads</a>
-        </div>
-      </li>
-      <li class="has-dropdown" role="none">
-        <a role="menuitem" aria-haspopup="true" aria-expanded="false">Get Involved</a>
-        <div class="dropdown" role="menu" aria-label="Get Involved">
-          <a href="get-involved.html#volunteer" role="menuitem">Volunteer</a>
-          <a href="get-involved.html#partner" role="menuitem">Partner</a>
-          <a href="get-involved.html#donate" role="menuitem">Donate</a>
-        </div>
-      </li>
-      <li role="none"><a role="menuitem" href="impact.html">Impact</a></li>
-      <li role="none"><a role="menuitem" class="btn donate" href="get-involved.html#donate">Donate</a></li>
-    </ul>
-  </nav>
-</header>
 
-<main id="main" class="container">
-  <h1>About SciHarmony</h1>
-  <p>SciHarmony is a student-led nonprofit focused on <strong>inclusive dental STEM</strong>:
-     sensory-aware <em>Clinic-Prep</em> for first-time visits and hands-on <em>Ortho Lab</em> sessions
-     that teach brackets, wires, and forces. We publish our materials open-source so schools and clinics can reuse them.</p>
+  <!-- ========== HEADER (same as index) ========== -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="SciHarmony home">
+      <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="SciHarmony logo" width="42" height="42"/>
+      <span class="brand-text">SciHarmony</span>
+    </a>
 
-  <h2>What we do</h2>
-  <ul>
-    <li><strong>Clinic-Prep:</strong> visual schedules, AAC dental boards, quiet-hour checklists, and low-volume tool demos.</li>
-    <li><strong>Ortho Lab:</strong> pegboard teeth, elastics, spring scales; predict → measure → reduce error.</li>
-    <li><strong>STEM Access Kits:</strong> calm on-ramp activities that feed into our dental tracks.</li>
-  </ul>
+    <nav class="main-nav" aria-label="Primary">
+      <ul class="menu">
+        <li class="has-dropdown">
+          <a href="about.html" aria-expanded="false">ABOUT</a>
+          <div class="dropdown">
+            <a href="about.html">About Us</a>
+            <a href="faq.html">FAQ</a>
+            <a href="press-kit.html">Press Kit</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </li>
+        <li class="has-dropdown">
+          <a href="programs.html" aria-expanded="false">PROGRAMS</a>
+          <div class="dropdown">
+            <a href="clinic-prep.html">Clinic-Prep</a>
+            <a href="ortho-lab.html">Ortho Lab</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </li>
+        <li><a href="impact.html">IMPACT</a></li>
+        <li><a href="accessibility.html">ACCESSIBILITY</a></li>
+      </ul>
+      <a class="btn donate" href="get-involved.html#donate">DONATE</a>
+    </nav>
+  </header>
 
-  <h2>Guardrails</h2>
-  <p class="small">Education and preparation only. Any clinical services are performed by licensed providers with their consent and paperwork.</p>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-main">
-    <h2 class="footer-title">SciHarmony</h2>
-    <p class="footer-tagline">Clinic-Prep & Ortho Lab — Inclusive Dental STEM</p>
-
-    <div class="footer-socials">
-      <a href="#" aria-label="Instagram" class="social-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
-          <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-1a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
-        </svg>
-      </a>
-      <a href="#" aria-label="LinkedIn" class="social-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
-          <path d="M20 2H4C2.897 2 2 2.897 2 4v16c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM8.339 18H5.661V9h2.678v9zM7 7.433c-.837 0-1.517-.679-1.517-1.516A1.517 1.517 0 017 4.4c.837 0 1.516.679 1.516 1.517A1.517 1.517 0 017 7.433zM19 18h-2.667v-4.604c0-1.098-.021-2.511-1.529-2.511-1.53 0-1.765 1.194-1.765 2.429V18h-2.666V9h2.56v1.233h.037c.357-.676 1.229-1.389 2.533-1.389 2.709 0 3.197 1.782 3.197 4.099V18z"/>
-        </svg>
-      </a>
-      <a href="#" aria-label="YouTube" class="social-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
-          <path d="M19.615 3.184C18.493 2.646 12 2.646 12 2.646s-6.493 0-7.615.538C3.354 3.72 3 5.17 3 5.17S2.646 7.015 2.646 9v6c0 1.985.354 3.83.739 4.83.743.538 7.615.538 7.615.538s6.493 0 7.615-.538c.621-.538.739-1.985.739-1.985s.354-1.845.354-3.83v-6c0-1.985-.354-3.83-.739-4.83zM10 15V9l5 3-5 3z"/>
-        </svg>
-      </a>
+  <!-- ========== HERO BAND (white→green transition & parallax) ========== -->
+  <section class="hero hero--small" role="banner">
+    <div class="hero-inner">
+      <h1>About SciHarmony</h1>
+      <p class="sub">Inclusive dental STEM that feels calm, clear, and hands-on.</p>
     </div>
+  </section>
 
-    <p class="footer-copy">© 2025 SciHarmony. Made with students.</p>
-  </div>
-</footer>
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="section">
+    <div class="container">
+      <p>SciHarmony is a student-led nonprofit focused on <strong>inclusive dental STEM</strong> —
+      sensory-aware <em>Clinic-Prep</em> for first-time visits and hands-on <em>Ortho Lab</em> sessions
+      that teach brackets, wires, and forces. We publish all materials open-source so schools and
+      clinics can reuse them freely.</p>
 
+      <h2>What We Do</h2>
+      <ul>
+        <li><strong>Clinic-Prep:</strong> visual schedules, AAC dental boards, quiet-hour checklists, and low-volume tool demos.</li>
+        <li><strong>Ortho Lab:</strong> pegboard teeth, elastics, spring scales — predict → measure → reduce error.</li>
+        <li><strong>STEM Access Kits:</strong> calm on-ramp activities that feed into our dental tracks.</li>
+      </ul>
+
+      <h2>Guardrails</h2>
+      <p class="small">Education and preparation only. Any clinical services are performed by licensed providers with their consent and paperwork.</p>
+    </div>
+  </main>
+
+  <!-- ========== FOOTER (gradient, white icons) ========== -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <strong>SCIHARMONY</strong><br/>
+        Clinic-Prep & Ortho Lab — Inclusive Dental STEM
+      </div>
+      <div>
+        <a href="mailto:hello@sciharmony.org">hello@sciharmony.org</a><br/>
+        <a href="privacy.html">Privacy</a>
+      </div>
+      <div class="socials">
+        <a href="#" class="ico ig" aria-label="Instagram"></a>
+        <a href="#" class="ico li" aria-label="LinkedIn"></a>
+        <a href="#" class="ico yt" aria-label="YouTube"></a>
+      </div>
+    </div>
+    <p class="copyright">© 2025 SciHarmony. Made with students.</p>
+  </footer>
+
+  <!-- ========== JS (same app bundle as index) ========== -->
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
