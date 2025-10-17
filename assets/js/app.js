@@ -1,6 +1,6 @@
-// ================= SciHarmony App =================
+/* ================= SciHarmony App (consolidated) ================= */
 
-// Impact Counter
+/* 1) Impact Counter */
 document.addEventListener('DOMContentLoaded', async () => {
   const el = document.querySelector('#impact-counters');
   if (!el) return;
@@ -19,16 +19,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       ['Volunteers trained', data.volunteers_trained]
     ];
 
-    el.innerHTML = items
-      .map(([k, v]) => `
-        <div class="kpi lift">
-          <div class="num">${v ?? '—'}</div>
-          <div class="lbl">${k}</div>
-        </div>
-      `)
-      .join('');
+    el.innerHTML = items.map(([k, v]) => `
+      <div class="kpi lift">
+        <div class="num">${v ?? '—'}</div>
+        <div class="lbl">${k}</div>
+      </div>
+    `).join('');
 
-    // Count-up for numeric tiles
+    // Count-up animation
     el.querySelectorAll('.num').forEach(num => {
       const target = parseInt(num.textContent, 10);
       if (isNaN(target)) return;
@@ -46,20 +44,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-// ---- Parallax Hero (CSS-variable drift; plays nice with backgrounds)
+/* 2) Parallax drift (CSS variable) */
 (function () {
   const hero = document.querySelector('.hero');
   if (!hero) return;
-
   function onScroll() {
-    // nudge the tiled dental icons layer a bit
     hero.style.setProperty('--bg-drift', (window.scrollY * 0.20) + 'px');
   }
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
-// Dropdown aria-expanded Accessibility
+/* 3) Dropdown aria-expanded */
 document.querySelectorAll('.main-nav .has-dropdown > a').forEach(link => {
   const li = link.parentElement;
   const set = v => link.setAttribute('aria-expanded', v ? 'true' : 'false');
@@ -69,7 +65,7 @@ document.querySelectorAll('.main-nav .has-dropdown > a').forEach(link => {
   li.addEventListener('focusout', e => { if (!li.contains(e.relatedTarget)) set(false); });
 });
 
-// Reveal on Scroll
+/* 4) Reveal-on-scroll baseline */
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -80,78 +76,60 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.18 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// Page Fade-In
-console.log("SciHarmony app loaded.");
+/* 5) Page fade-in baseline */
 document.body.classList.add('fade-in');
 window.addEventListener('load', () => document.body.classList.remove('fade-in'));
-/* ============ Aesthetic Bundle JS: hero particles + footer progress ============ */
 
-// 1) Subtle floating particles inside .hero (no HTML changes; we inject a canvas)
+console.log("SciHarmony app loaded.");
+
+/* ================= Aesthetic Bundle: particles + footer progress ================= */
+
+/* 6) Floating particles in hero */
 (function(){
   const hero = document.querySelector('.hero');
   if(!hero) return;
 
-  // Respect reduced motion
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
   const canvas = document.createElement('canvas');
   canvas.id = 'heroParticles';
-  hero.prepend(canvas); // sit under .hero-inner and ::after
+  hero.prepend(canvas);
   const ctx = canvas.getContext('2d');
 
-  let w = 0, h = 0;
-  let particles = [];
-  let rafId = null;
+  let w=0, h=0, particles=[], rafId=null;
 
   function resize(){
-    // size canvas to hero box
     const rect = hero.getBoundingClientRect();
     w = canvas.width = rect.width;
     h = canvas.height = rect.height || window.innerHeight * 0.6;
-
-    // regenerate particles
     const count = Math.max(14, Math.min(32, Math.round(w / 60)));
     particles = Array.from({length: count}, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 2 + 1,        // 1–3 px
-      s: Math.random() * 0.35 + 0.15,  // speed
-      a: Math.random() * Math.PI * 2   // drift angle
+      x: Math.random()*w, y: Math.random()*h,
+      r: Math.random()*2+1, s: Math.random()*0.35+0.15, a: Math.random()*Math.PI*2
     }));
   }
-
   function draw(){
     ctx.clearRect(0,0,w,h);
     ctx.fillStyle = 'rgba(255,255,255,0.09)';
     for(const p of particles){
-      p.y += p.s;
-      p.x += Math.sin(p.a) * 0.3;
-      p.a += 0.003;
-      if(p.y > h + 10) p.y = -10;
-      if(p.x > w + 10) p.x = -10;
-      if(p.x < -10) p.x = w + 10;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fill();
+      p.y += p.s; p.x += Math.sin(p.a)*0.3; p.a += 0.003;
+      if(p.y>h+10) p.y=-10;
+      if(p.x>w+10) p.x=-10;
+      if(p.x<-10) p.x=w+10;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
     }
     rafId = requestAnimationFrame(draw);
   }
-
-  // kick off
   resize(); draw();
-  window.addEventListener('resize', () => {
-    cancelAnimationFrame(rafId);
-    resize(); draw();
-  });
+  window.addEventListener('resize', () => { cancelAnimationFrame(rafId); resize(); draw(); });
 })();
 
-// 6) Footer scroll progress bar (auto-injected)
+/* 7) Footer scroll progress bar */
 (function(){
   const bar = document.createElement('div');
   bar.id = 'footer-progress';
   document.body.appendChild(bar);
-
   function set(){
     const h = document.documentElement;
     const p = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
@@ -160,20 +138,21 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   set();
   window.addEventListener('scroll', set, { passive:true });
 })();
-// ===== Mobile Drawer (injects button + menu) =====
+
+/* ================= Mobile drawer + Theme toggle + 3D tilt ================= */
+
+/* 8) Mobile drawer nav */
 (function(){
   const header = document.querySelector('.site-header');
   const nav = document.querySelector('.main-nav');
   if(!header || !nav) return;
 
-  // Button
   const btn = document.createElement('button');
   btn.className = 'nav-toggle';
   btn.setAttribute('aria-label','Open menu');
   btn.innerHTML = '<span></span>';
   header.appendChild(btn);
 
-  // Drawer
   const drawer = document.createElement('nav');
   drawer.className = 'drawer';
   drawer.setAttribute('aria-label','Mobile');
@@ -203,15 +182,14 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   drawer.addEventListener('click', e=>{ if(e.target.tagName === 'A') toggle(false); });
   window.addEventListener('resize', ()=>{ if(window.innerWidth>860) toggle(false); });
 })();
-// ===== Theme: auto + toggle =====
+
+/* 9) Theme: auto + toggle chip */
 (function(){
   const root = document.documentElement;
-  // initial: respect saved pref or system
   const saved = localStorage.getItem('theme');
   const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   root.setAttribute('data-theme', saved || (systemDark ? 'dark' : 'light'));
 
-  // inject toggle button
   const header = document.querySelector('.site-header');
   if(!header) return;
   const toggle = document.createElement('button');
@@ -229,33 +207,30 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
     setLabel();
   });
 })();
-// ===== 3D tilt micro-interaction =====
+
+/* 10) 3D tilt on cards/KPIs */
 (function(){
   const els = document.querySelectorAll('.card, .kpi');
   els.forEach(el => el.classList.add('tiltable'));
-
   function tilt(e){
     const r = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width;
     const y = (e.clientY - r.top) / r.height;
-    const rx = (0.5 - y) * 6;   // max 6deg
-    const ry = (x - 0.5) * 8;   // max 8deg
+    const rx = (0.5 - y) * 6;
+    const ry = (x - 0.5) * 8;
     e.currentTarget.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
   }
-  function reset(e){
-    e.currentTarget.style.transform = '';
-  }
+  function reset(e){ e.currentTarget.style.transform = ''; }
   els.forEach(el=>{
     el.addEventListener('mousemove', tilt);
     el.addEventListener('mouseleave', reset);
     el.addEventListener('touchend', reset, {passive:true});
   });
 })();
-/* ============ Enhancements Pack JS ============ */
 
-// — Dark mode nav already handled via CSS overrides —
+/* ================= Enhancements: testimonials, badge, theme-color, spotlight, mini-chart, a11y, year ================= */
 
-// 1) Inject Testimonial carousel section (after first .section)
+/* 11) Testimonial carousel */
 (function(){
   const after = document.querySelector('.section');
   if(!after) return;
@@ -293,7 +268,7 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   wrap.addEventListener('mouseleave', ()=>t=setInterval(auto,4000));
 })();
 
-// 2) Footer “Made by students” badge
+/* 12) Footer badge */
 (function(){
   const tgt = document.querySelector('.site-footer .footer-main, .footer-grid');
   if(!tgt) return;
@@ -303,7 +278,7 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   (tgt.querySelector('.footer-copy')||tgt).insertAdjacentElement('beforebegin', badge);
 })();
 
-// 3) Theme-color meta that tracks theme (mobile tab color)
+/* 13) Theme-color meta reflects theme */
 (function(){
   function setThemeColor(){
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -316,7 +291,7 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   obs.observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
 })();
 
-// 4) Hero spotlight follows cursor (CSS var)
+/* 14) Hero spotlight tracks cursor */
 (function(){
   const hero = document.querySelector('.hero');
   if(!hero) return;
@@ -330,9 +305,8 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   hero.addEventListener('mousemove', move);
 })();
 
-// 5) Impact mini chart (donut of preparedness pre vs post)
+/* 15) Impact mini donut chart */
 (function(){
-  // Only on pages that have impact counters container
   const host = document.querySelector('#impact-counters');
   if(!host) return;
   const box = document.createElement('div');
@@ -345,8 +319,6 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
     const pre = Number(data.preparedness_pre||0);
     const post = Number(data.preparedness_post||0);
     const ctx = document.getElementById('impactChart').getContext('2d');
-
-    // tiny custom donut without external libs
     const W = ctx.canvas.width, H = ctx.canvas.height, cx=W/2, cy=H/2, R=80, r=48;
     ctx.clearRect(0,0,W,H);
     const total = pre+post || 1;
@@ -356,14 +328,11 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
       ctx.beginPath();
       ctx.arc(cx,cy,R,start,start+ang);
       ctx.arc(cx,cy,r,start+ang,start,true);
-      ctx.closePath();
-      ctx.fillStyle = color;
-      ctx.fill();
+      ctx.closePath(); ctx.fillStyle = color; ctx.fill();
     }
-    ring(-Math.PI/2, angPre, '#d1fae5');           // soft mint
-    ring(-Math.PI/2+angPre, angPost, '#1C7C54');   // brand green
+    ring(-Math.PI/2, angPre, '#d1fae5');
+    ring(-Math.PI/2+angPre, angPost, '#1C7C54');
 
-    // labels
     ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--ink') || '#0f172a';
     ctx.font = '700 16px Manrope, Inter, system-ui';
     ctx.textAlign = 'center';
@@ -373,16 +342,14 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   }).catch(()=>{});
 })();
 
-// 6) Accessibility helper (text size, contrast, motion, sounds, theme)
+/* 16) Accessibility helper */
 (function(){
   const root = document.documentElement;
-  // button
   const btn = document.createElement('button');
   btn.id = 'a11y-btn'; btn.title = 'Accessibility';
   btn.innerHTML = '⚙️';
   document.body.appendChild(btn);
 
-  // panel
   const panel = document.createElement('div');
   panel.id = 'a11y-panel';
   panel.innerHTML = `
@@ -411,7 +378,6 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   `;
   document.body.appendChild(panel);
 
-  // state
   const state = {
     textzoom: localStorage.getItem('textzoom') || '',
     contrast: localStorage.getItem('contrast') || '',
@@ -432,7 +398,6 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   });
 
   function apply(){
-    // attributes on :root
     root.setAttribute('data-textzoom', state.textzoom || '');
     root.setAttribute('data-contrast', state.contrast || '');
     root.setAttribute('data-motion',   state.motion || '');
@@ -449,7 +414,7 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   }
   markActive();
 
-  // Tiny UI blip sound if enabled
+  // Tiny UI blip (only if enabled)
   document.addEventListener('mouseover', e=>{
     if(state.sound!=='on') return;
     if(!e.target.closest('.btn, .chip, .menu > li > a, .card')) return;
@@ -463,35 +428,16 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   }, {passive:true});
 })();
 
-// 7) Footer year auto-update
+/* 17) Footer year auto-update */
 (function(){
   const el = document.querySelector('.footer-copy, .copyright');
   if(!el) return;
   el.innerHTML = (el.innerHTML||'').replace(/\b20\d{2}\b/, new Date().getFullYear());
 })();
-/* ========= Final Polish Pack JS ========= */
 
-// Prep page fade baseline
-document.body.classList.add('page-fade');
+/* ================= Final Polish: page transitions, cursor, section glow, headline split ================= */
 
-// 1) Hero headline: split into words and stagger-animate
-(function(){
-  const h = document.querySelector('.hero h1');
-  if(!h) return;
-  const text = h.textContent.trim().replace(/\s+/g,' ');
-  const words = text.split(' ');
-  h.textContent = '';
-  h.classList.add('split');
-  words.forEach((w, i) => {
-    const span = document.createElement('span');
-    span.className = 'word';
-    span.style.animationDelay = (0.06 * i) + 's';
-    span.textContent = (i < words.length - 1) ? w + ' ' : w;
-    h.appendChild(span);
-  });
-})();
-
-// 2) Smooth page transitions for internal links
+/* 18) Smooth internal page transitions */
 (function(){
   const isInternal = href =>
     href && !href.startsWith('http') && !href.startsWith('mailto:') && !href.startsWith('#') && !href.startsWith('tel:');
@@ -505,26 +451,18 @@ document.body.classList.add('page-fade');
     document.body.classList.add('out');
     setTimeout(() => { window.location.href = href; }, 180);
   });
-
-  // Ensure visible once loaded (plays nice with your existing fade logic)
-  window.addEventListener('pageshow', () => {
-    document.body.classList.remove('out');
-  });
+  window.addEventListener('pageshow', () => document.body.classList.remove('out'));
 })();
 
-// 3) Custom cursor ring
+/* 19) Custom cursor ring (desktop only) */
 (function(){
-  // Skip if user prefers reduced motion or on coarse pointer
   const coarse = window.matchMedia && (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer:coarse)').matches);
   if(coarse) return;
-
   const ring = document.createElement('div');
   ring.className = 'cursor-ring hide';
   document.body.appendChild(ring);
 
-  let raf = null;
-  let x = 0, y = 0;
-
+  let raf=null, x=0, y=0;
   const move = e => {
     x = e.clientX; y = e.clientY;
     if(!raf){
@@ -538,19 +476,15 @@ document.body.classList.add('page-fade');
   };
   window.addEventListener('mousemove', move, { passive:true });
 
-  // Grow ring over interactive elements
   const hoverables = 'a, button, .btn, .card, .kpi, .chip, .menu > li > a';
   document.addEventListener('mouseover', e => {
-    if(e.target.closest(hoverables)) ring.classList.add('grow'); else ring.classList.remove('grow');
+    ring.classList.toggle('grow', !!e.target.closest(hoverables));
   }, { passive:true });
 
-  // Hide when leaving window
-  window.addEventListener('mouseout', e => {
-    if(!e.relatedTarget) ring.classList.add('hide');
-  });
+  window.addEventListener('mouseout', e => { if(!e.relatedTarget) ring.classList.add('hide'); });
 })();
 
-// 4) Section glow border on reveal (piggybacks your IntersectionObserver)
+/* 20) Section glow seam on reveal */
 (function(){
   const sections = document.querySelectorAll('.section');
   if(!sections.length) return;
@@ -564,12 +498,13 @@ document.body.classList.add('page-fade');
   }, { threshold: 0.28 });
   sections.forEach(s => obs.observe(s));
 })();
-// Hero headline: split into words (with proper spacing via margin)
-(function(){
-  const h = document.querySelector('.hero h1');
-  if(!h) return;
 
-  const txt = h.textContent.trim().replace(/\s+/g,' ');
+/* 21) HERO HEADLINE: space-safe word split (inserts REAL spaces) */
+(function () {
+  const h = document.querySelector('.hero h1');
+  if (!h) return;
+
+  const txt = h.textContent.trim().replace(/\s+/g, ' ');
   const words = txt.split(' ');
 
   h.textContent = '';
@@ -578,8 +513,9 @@ document.body.classList.add('page-fade');
   words.forEach((w, i) => {
     const span = document.createElement('span');
     span.className = 'word';
-    span.textContent = w;                  // no trailing spaces
+    span.textContent = w;
     span.style.animationDelay = (0.06 * i) + 's';
     h.appendChild(span);
+    if (i < words.length - 1) h.appendChild(document.createTextNode(' ')); // ← real space node
   });
 })();
