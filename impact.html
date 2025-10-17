@@ -7,18 +7,16 @@
   <meta name="description" content="SciHarmony — Clinic-Prep and Ortho Lab: inclusive dental STEM." />
   <link rel="icon" href="assets/logo/favicon-sciharmony-dental-green.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/styles.css" />
-  
-<style>
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0}
-.tile{border:1px solid #e5e7eb;border-radius:16px;padding:16px;background:#fff}
-.tile .num{font-size:28px;font-weight:700}
-.tile .lbl{font-size:14px;color:#475569}
-table{width:100%;border-collapse:collapse;margin-top:16px}
-th,td{border-bottom:1px solid #e5e7eb;padding:10px 8px;text-align:left}
-th{font-size:14px;color:#475569;font-weight:600}
-.note{font-size:13px;color:#475569}
-</style>
-
+  <style>
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0}
+    .tile{border:1px solid #e5e7eb;border-radius:16px;padding:16px;background:#fff}
+    .tile .num{font-size:28px;font-weight:700}
+    .tile .lbl{font-size:14px;color:#475569}
+    table{width:100%;border-collapse:collapse;margin-top:16px}
+    th,td{border-bottom:1px solid #e5e7eb;padding:10px 8px;text-align:left}
+    th{font-size:14px;color:#475569;font-weight:600}
+    .note{font-size:13px;color:#475569}
+  </style>
 </head>
 <body>
 
@@ -27,52 +25,85 @@ th{font-size:14px;color:#475569;font-weight:600}
     <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="SciHarmony logo" width="40" height="40" />
     <span class="brand-text">SciHarmony</span>
   </a>
-  <nav class="nav" aria-label="primary">
-    <a href="clinic-prep.html">Clinic-Prep</a>
-    <a href="ortho-lab.html">Ortho Lab</a>
-    <a href="downloads.html">Downloads</a>
-    <a href="impact.html" aria-current="page">Impact</a>
-    <a href="accessibility.html">Accessibility</a>
-    <a href="press-kit.html">Press</a>
-    <a href="contact.html">Contact</a>
-    <a class="btn donate" href="get-involved.html#donate">Donate</a>
+
+  <nav class="nav main-nav" aria-label="primary">
+    <ul class="menu" role="menubar">
+
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" aria-haspopup="true" aria-expanded="false">About</a>
+        <div class="dropdown" role="menu" aria-label="About">
+          <a href="about.html" role="menuitem">About Us</a>
+          <a href="faq.html" role="menuitem">FAQ</a>
+          <a href="press-kit.html" role="menuitem">Press Kit</a>
+          <a href="contact.html" role="menuitem">Contact</a>
+        </div>
+      </li>
+
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" aria-haspopup="true" aria-expanded="false">Programs</a>
+        <div class="dropdown" role="menu" aria-label="Programs">
+          <a href="clinic-prep.html" role="menuitem">Clinic-Prep</a>
+          <a href="ortho-lab.html" role="menuitem">Ortho Lab</a>
+          <a href="downloads.html" role="menuitem">Downloads</a>
+        </div>
+      </li>
+
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" aria-haspopup="true" aria-expanded="false">Get Involved</a>
+        <div class="dropdown" role="menu" aria-label="Get Involved">
+          <a href="get-involved.html#volunteer" role="menuitem">Volunteer</a>
+          <a href="get-involved.html#partner" role="menuitem">Partner</a>
+          <a href="get-involved.html#donate" role="menuitem">Donate</a>
+        </div>
+      </li>
+
+      <li role="none"><a role="menuitem" href="impact.html" aria-current="page">Impact</a></li>
+      <li role="none"><a role="menuitem" href="accessibility.html">Accessibility</a></li>
+      <li role="none"><a role="menuitem" class="btn donate" href="get-involved.html#donate">Donate</a></li>
+
+    </ul>
   </nav>
+
   <a class="skip-link" href="#main">Skip to content</a>
 </header>
 
 <main id="main" class="container">
+  <h1>Impact</h1>
+  <p>We track a few boring-but-real numbers so this isn’t just vibes.</p>
 
-<h1>Impact</h1>
-<p>We track a few boring-but-real numbers so this isn’t just vibes.</p>
-<div id="kpis" class="grid" aria-live="polite"></div>
-<h2>Recent sessions</h2>
-<table id="sessions">
-  <thead><tr><th>Date</th><th>Program</th><th>Site</th><th>Students</th><th>Key outcome</th></tr></thead>
-  <tbody></tbody>
-</table>
-<script>
-fetch('data/impact.json').then(r=>r.ok?r.json():Promise.reject(r.status)).then(data=>{
-  const k = [
-    ["Clinic-prep kits distributed", data.kits_distributed],
-    ["Preparedness (pre→post)", data.preparedness_pre + "→" + data.preparedness_post],
-    ["Mirror-tolerance change", (data.mirror_tolerance_change_seconds>0?"+":"") + data.mirror_tolerance_change_seconds + "s"],
-    ["Ortho Lab sessions", data.ortho_sessions],
-    ["Students served", data.students_served],
-    ["Volunteers trained", data.volunteers_trained]
-  ];
-  document.getElementById('kpis').innerHTML = k.map(([lbl,num]) =>
-    `<div class="tile"><div class="num">${num ?? "—"}</div><div class="lbl">${lbl}</div></div>`
-  ).join('');
-  const tbody = document.querySelector('#sessions tbody');
-  tbody.innerHTML = (data.sessions||[]).map(s => `
-    <tr><td>${s.date||""}</td><td>${s.program||""}</td><td>${s.site||""}</td><td>${s.students||""}</td><td>${s.outcome||""}</td></tr>
-  `).join('') || `<tr><td colspan="5" class="note">Add entries to <code>data/impact.json</code>.</td></tr>`;
-}).catch(_=>{
-  document.getElementById('kpis').innerHTML = '<div class="tile"><div class="num">?</div><div class="lbl">Could not load data/impact.json</div></div>';
-});
-</script>
-<p class="small">Education and preparation only. Any clinical services are performed by licensed providers under their consent and paperwork.</p>
+  <div id="kpis" class="grid" aria-live="polite"></div>
 
+  <h2>Recent sessions</h2>
+  <table id="sessions">
+    <thead>
+      <tr><th>Date</th><th>Program</th><th>Site</th><th>Students</th><th>Key outcome</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch('data/impact.json').then(r=>r.ok?r.json():Promise.reject(r.status)).then(data=>{
+      const k = [
+        ["Clinic-prep kits distributed", data.kits_distributed],
+        ["Preparedness (pre→post)", data.preparedness_pre + "→" + data.preparedness_post],
+        ["Mirror-tolerance change", (data.mirror_tolerance_change_seconds>0?"+":"") + data.mirror_tolerance_change_seconds + "s"],
+        ["Ortho Lab sessions", data.ortho_sessions],
+        ["Students served", data.students_served],
+        ["Volunteers trained", data.volunteers_trained]
+      ];
+      document.getElementById('kpis').innerHTML = k.map(([lbl,num]) =>
+        `<div class="tile"><div class="num">${num ?? "—"}</div><div class="lbl">${lbl}</div></div>`
+      ).join('');
+      const tbody = document.querySelector('#sessions tbody');
+      tbody.innerHTML = (data.sessions||[]).map(s => `
+        <tr><td>${s.date||""}</td><td>${s.program||""}</td><td>${s.site||""}</td><td>${s.students||""}</td><td>${s.outcome||""}</td></tr>
+      `).join('') || `<tr><td colspan="5" class="note">Add entries to <code>data/impact.json</code>.</td></tr>`;
+    }).catch(_=>{
+      document.getElementById('kpis').innerHTML = '<div class="tile"><div class="num">?</div><div class="lbl">Could not load data/impact.json</div></div>';
+    });
+  </script>
+
+  <p class="small">Education and preparation only. Any clinical services are performed by licensed providers under their consent and paperwork.</p>
 </main>
 
 <footer class="site-footer">
