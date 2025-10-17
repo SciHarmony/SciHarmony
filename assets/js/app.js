@@ -469,3 +469,98 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   if(!el) return;
   el.innerHTML = (el.innerHTML||'').replace(/\b20\d{2}\b/, new Date().getFullYear());
 })();
+/* ========= Final Polish Pack JS ========= */
+
+// Prep page fade baseline
+document.body.classList.add('page-fade');
+
+// 1) Hero headline: split into words and stagger-animate
+(function(){
+  const h = document.querySelector('.hero h1');
+  if(!h) return;
+  const text = h.textContent.trim().replace(/\s+/g,' ');
+  const words = text.split(' ');
+  h.textContent = '';
+  h.classList.add('split');
+  words.forEach((w, i) => {
+    const span = document.createElement('span');
+    span.className = 'word';
+    span.style.animationDelay = (0.06 * i) + 's';
+    span.textContent = (i < words.length - 1) ? w + ' ' : w;
+    h.appendChild(span);
+  });
+})();
+
+// 2) Smooth page transitions for internal links
+(function(){
+  const isInternal = href =>
+    href && !href.startsWith('http') && !href.startsWith('mailto:') && !href.startsWith('#') && !href.startsWith('tel:');
+
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a');
+    if(!a) return;
+    const href = a.getAttribute('href');
+    if(!isInternal(href) || a.hasAttribute('download') || a.getAttribute('target') === '_blank') return;
+    e.preventDefault();
+    document.body.classList.add('out');
+    setTimeout(() => { window.location.href = href; }, 180);
+  });
+
+  // Ensure visible once loaded (plays nice with your existing fade logic)
+  window.addEventListener('pageshow', () => {
+    document.body.classList.remove('out');
+  });
+})();
+
+// 3) Custom cursor ring
+(function(){
+  // Skip if user prefers reduced motion or on coarse pointer
+  const coarse = window.matchMedia && (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer:coarse)').matches);
+  if(coarse) return;
+
+  const ring = document.createElement('div');
+  ring.className = 'cursor-ring hide';
+  document.body.appendChild(ring);
+
+  let raf = null;
+  let x = 0, y = 0;
+
+  const move = e => {
+    x = e.clientX; y = e.clientY;
+    if(!raf){
+      raf = requestAnimationFrame(() => {
+        ring.style.left = x + 'px';
+        ring.style.top  = y + 'px';
+        ring.classList.remove('hide');
+        raf = null;
+      });
+    }
+  };
+  window.addEventListener('mousemove', move, { passive:true });
+
+  // Grow ring over interactive elements
+  const hoverables = 'a, button, .btn, .card, .kpi, .chip, .menu > li > a';
+  document.addEventListener('mouseover', e => {
+    if(e.target.closest(hoverables)) ring.classList.add('grow'); else ring.classList.remove('grow');
+  }, { passive:true });
+
+  // Hide when leaving window
+  window.addEventListener('mouseout', e => {
+    if(!e.relatedTarget) ring.classList.add('hide');
+  });
+})();
+
+// 4) Section glow border on reveal (piggybacks your IntersectionObserver)
+(function(){
+  const sections = document.querySelectorAll('.section');
+  if(!sections.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('glow-on');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.28 });
+  sections.forEach(s => obs.observe(s));
+})();
