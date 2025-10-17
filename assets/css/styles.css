@@ -573,7 +573,6 @@ body.page-fade { opacity:1; transition:opacity .25s ease; }
 body.page-fade.out { opacity:0; }
 
 /* 3) Custom cursor ring */
-body { cursor:none; }
 .cursor-ring{
   position:fixed; left:0; top:0; width:28px; height:28px;
   border:2px solid rgba(28,124,84,.85);
