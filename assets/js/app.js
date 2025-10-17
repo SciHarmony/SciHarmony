@@ -82,4 +82,6 @@ const revealObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 console.log("SciHarmony app loaded.");
+document.body.classList.add('fade-in');
+window.addEventListener('load', () => document.body.classList.remove('fade-in'));
 
