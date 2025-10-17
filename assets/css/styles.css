@@ -477,3 +477,79 @@ link[rel="icon"] {
 .tiltable:hover{
   box-shadow:0 16px 36px rgba(0,0,0,.12);
 }
+/* ================= Enhancements Pack ================ */
+
+/* — Fix: dark mode nav/link colors — */
+:root[data-theme="dark"] .main-nav .menu > li > a { color:#fff; }
+:root[data-theme="dark"] .site-header .dropdown { background:#0f172a; border-color:#1c2538; }
+:root[data-theme="dark"] .site-header .dropdown a { color:#e6edf3 !important; }
+:root[data-theme="dark"] .site-header .dropdown a:hover { background:#0b1220; color:#5fd3aa !important; }
+
+/* — Testimonial carousel — */
+.testimonials{position:relative; overflow:hidden; padding:56px 16px}
+.testimonial-track{display:flex; gap:16px; transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.testimonial{min-width:320px; max-width:360px; background:rgba(255,255,255,.7); backdrop-filter:blur(10px);
+  border:1px solid #e5e7eb; border-radius:16px; padding:18px; box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.testimonial .who{margin-top:10px; font-weight:700; color:#0f172a}
+.testimonial .role{font-size:13px; color:#475569}
+.testi-nav{display:flex; justify-content:center; gap:10px; margin-top:14px}
+.testi-dot{width:8px;height:8px;border-radius:999px;background:#cbd5e1;cursor:pointer;transition:.2s}
+.testi-dot.active{background:var(--green)}
+
+/* Dark mode cards in carousel */
+:root[data-theme="dark"] .testimonial{background:rgba(16,24,39,.6); border-color:#1c2538}
+:root[data-theme="dark"] .testimonial .who{color:#e6edf3}
+:root[data-theme="dark"] .testimonial .role{color:#9aa9b6}
+
+/* — Footer “Made by students” badge — */
+.footer-badge{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+  background:rgba(255,255,255,.22); color:#fff; border:1px solid rgba(255,255,255,.35); font-weight:700}
+.footer-badge svg{opacity:.9}
+
+/* — Hero spotlight that follows the cursor — */
+.hero{position:relative}
+.hero::after{ /* you already have a gradient here; keep it. Spotlight sits under overlay via extra layer below */
+  pointer-events:none;
+}
+.hero::before{
+  content:""; position:absolute; inset:-10%; z-index:1; pointer-events:none;
+  background:
+    radial-gradient(190px 190px at var(--mx,50%) var(--my,40%), rgba(255,255,255,.10), transparent 60%);
+}
+
+/* — Impact mini chart — */
+#impact-mini{max-width:520px;margin:12px auto 0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:12px}
+#impact-mini canvas{width:100%; height:200px; display:block}
+:root[data-theme="dark"] #impact-mini{background:#0f172a;border-color:#1c2538}
+
+/* — Accessibility panel — */
+#a11y-btn{
+  position:fixed; right:16px; bottom:76px; z-index:1000;
+  width:44px; height:44px; border-radius:999px; border:1px solid #e5e7eb;
+  background:rgba(255,255,255,.8); backdrop-filter:blur(10px); cursor:pointer; color:#0e0e0e;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+#a11y-panel{
+  position:fixed; right:16px; bottom:126px; z-index:1000; width:280px; padding:12px;
+  background:rgba(255,255,255,.92); border:1px solid #e5e7eb; border-radius:14px; backdrop-filter:blur(10px);
+  display:none; box-shadow:0 18px 36px rgba(2,8,23,.18), 0 6px 16px rgba(2,8,23,.12);
+}
+#a11y-panel.open{display:block}
+#a11y-panel h3{margin:4px 0 8px; font-size:14px; color:#475569; text-transform:uppercase; letter-spacing:.08em}
+#a11y-panel .row{display:flex; gap:8px; flex-wrap:wrap}
+#a11y-panel .chip{padding:8px 10px; border-radius:10px; border:1px solid #e5e7eb; cursor:pointer; background:#fff}
+#a11y-panel .chip.active{border-color:var(--green); box-shadow:0 0 0 3px rgba(105,195,155,.25)}
+:root[data-theme="dark"] #a11y-btn{border-color:#1c2538; background:rgba(16,24,39,.8); color:#e6edf3}
+:root[data-theme="dark"] #a11y-panel{background:rgba(16,24,39,.92); border-color:#1c2538}
+:root[data-theme="dark"] #a11y-panel .chip{background:#0f172a; border-color:#1c2538; color:#e6edf3}
+
+/* — Accessibility modes — */
+:root[data-contrast="high"]{
+  --ink:#0a0a0a; --muted:#1f2937; --green:#137554; --green2:#48b78f;
+  filter:contrast(1.05) saturate(1.05);
+}
+:root[data-textzoom="lg"]{ font-size:112% }
+:root[data-textzoom="xl"]{ font-size:122% }
+:root[data-motion="reduce"] *{
+  animation-duration:.001s !important; animation-iteration-count:1 !important; transition:none !important;
+}
