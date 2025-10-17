@@ -251,3 +251,221 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
     el.addEventListener('touchend', reset, {passive:true});
   });
 })();
+/* ============ Enhancements Pack JS ============ */
+
+// — Dark mode nav already handled via CSS overrides —
+
+// 1) Inject Testimonial carousel section (after first .section)
+(function(){
+  const after = document.querySelector('.section');
+  if(!after) return;
+  const wrap = document.createElement('section');
+  wrap.className = 'section testimonials reveal';
+  wrap.innerHTML = `
+    <div class="container">
+      <h2>What families say</h2>
+      <div class="testimonial-track" id="testiTrack">
+        <div class="testimonial"><p>“Clinic-Prep turned our dreaded visit into a routine. Visual cards helped us rehearse at home.”</p><div class="who">Ava’s Mom</div><div class="role">Caregiver</div></div>
+        <div class="testimonial"><p>“Ortho Lab made forces finally click. I could predict elastic pull within 0.2N by the third trial.”</p><div class="who">Rohan</div><div class="role">Student, 10th</div></div>
+        <div class="testimonial"><p>“Quiet-hour tool demos were a game changer for sensory needs. Students arrived ready.”</p><div class="who">Ms. Tran</div><div class="role">School Nurse</div></div>
+        <div class="testimonial"><p>“The AAC dental board gave my nonverbal son a voice for the first time in a clinic.”</p><div class="who">Miguel’s Dad</div><div class="role">Caregiver</div></div>
+      </div>
+      <div class="testi-nav" id="testiDots"></div>
+    </div>`;
+  after.insertAdjacentElement('afterend', wrap);
+
+  const track = wrap.querySelector('#testiTrack');
+  const dotsEl = wrap.querySelector('#testiDots');
+  const items = Array.from(track.children);
+  let i = 0;
+  items.forEach((_,idx)=>{
+    const d=document.createElement('div'); d.className='testi-dot'+(idx===0?' active':'');
+    d.addEventListener('click',()=>go(idx)); dotsEl.appendChild(d);
+  });
+  function go(idx){
+    i = idx % items.length;
+    track.style.transform = `translateX(${-(items[0].offsetWidth+16)*i}px)`;
+    dotsEl.querySelectorAll('.testi-dot').forEach((d,k)=>d.classList.toggle('active',k===i));
+  }
+  function auto(){ go(i+1); }
+  let t=setInterval(auto, 4000);
+  wrap.addEventListener('mouseenter', ()=>clearInterval(t));
+  wrap.addEventListener('mouseleave', ()=>t=setInterval(auto,4000));
+})();
+
+// 2) Footer “Made by students” badge
+(function(){
+  const tgt = document.querySelector('.site-footer .footer-main, .footer-grid');
+  if(!tgt) return;
+  const badge = document.createElement('div');
+  badge.className = 'footer-badge';
+  badge.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.09 6.26h6.58l-5.32 3.86 2.03 6.24L12 15.77 6.62 18.36l2.03-6.24L3.33 8.26h6.58L12 2z"/></svg> Made with students`;
+  (tgt.querySelector('.footer-copy')||tgt).insertAdjacentElement('beforebegin', badge);
+})();
+
+// 3) Theme-color meta that tracks theme (mobile tab color)
+(function(){
+  function setThemeColor(){
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    let m = document.querySelector('meta[name="theme-color"]');
+    if(!m){ m = document.createElement('meta'); m.setAttribute('name','theme-color'); document.head.appendChild(m); }
+    m.setAttribute('content', dark ? '#0b1220' : '#ffffff');
+  }
+  setThemeColor();
+  const obs = new MutationObserver(setThemeColor);
+  obs.observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
+})();
+
+// 4) Hero spotlight follows cursor (CSS var)
+(function(){
+  const hero = document.querySelector('.hero');
+  if(!hero) return;
+  const move = e => {
+    const r = hero.getBoundingClientRect();
+    const x = ((e.clientX - r.left)/r.width)*100;
+    const y = ((e.clientY - r.top)/r.height)*100;
+    hero.style.setProperty('--mx', x+'%');
+    hero.style.setProperty('--my', y+'%');
+  };
+  hero.addEventListener('mousemove', move);
+})();
+
+// 5) Impact mini chart (donut of preparedness pre vs post)
+(function(){
+  // Only on pages that have impact counters container
+  const host = document.querySelector('#impact-counters');
+  if(!host) return;
+  const box = document.createElement('div');
+  box.id = 'impact-mini';
+  box.innerHTML = `<canvas id="impactChart" width="520" height="220" aria-label="Preparedness chart"></canvas>`;
+  host.insertAdjacentElement('afterend', box);
+
+  fetch('data/impact.json').then(r=>r.ok?r.json():null).then(data=>{
+    if(!data) return;
+    const pre = Number(data.preparedness_pre||0);
+    const post = Number(data.preparedness_post||0);
+    const ctx = document.getElementById('impactChart').getContext('2d');
+
+    // tiny custom donut without external libs
+    const W = ctx.canvas.width, H = ctx.canvas.height, cx=W/2, cy=H/2, R=80, r=48;
+    ctx.clearRect(0,0,W,H);
+    const total = pre+post || 1;
+    const angPre = (pre/total)*Math.PI*2, angPost = (post/total)*Math.PI*2;
+
+    function ring(start, ang, color){
+      ctx.beginPath();
+      ctx.arc(cx,cy,R,start,start+ang);
+      ctx.arc(cx,cy,r,start+ang,start,true);
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+    ring(-Math.PI/2, angPre, '#d1fae5');           // soft mint
+    ring(-Math.PI/2+angPre, angPost, '#1C7C54');   // brand green
+
+    // labels
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--ink') || '#0f172a';
+    ctx.font = '700 16px Manrope, Inter, system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText('Preparedness', cx, cy-6);
+    ctx.font = '700 20px Manrope, Inter, system-ui';
+    ctx.fillText(`${pre} → ${post}`, cx, cy+18);
+  }).catch(()=>{});
+})();
+
+// 6) Accessibility helper (text size, contrast, motion, sounds, theme)
+(function(){
+  const root = document.documentElement;
+  // button
+  const btn = document.createElement('button');
+  btn.id = 'a11y-btn'; btn.title = 'Accessibility';
+  btn.innerHTML = '⚙️';
+  document.body.appendChild(btn);
+
+  // panel
+  const panel = document.createElement('div');
+  panel.id = 'a11y-panel';
+  panel.innerHTML = `
+    <h3>Accessibility</h3>
+    <div class="row">
+      <button class="chip" data-textzoom="">Text: Default</button>
+      <button class="chip" data-textzoom="lg">Text: Large</button>
+      <button class="chip" data-textzoom="xl">Text: X-Large</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="chip" data-contrast="">Contrast: Normal</button>
+      <button class="chip" data-contrast="high">Contrast: High</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="chip" data-motion="">Motion: Normal</button>
+      <button class="chip" data-motion="reduce">Motion: Reduce</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="chip" data-sound="off">UI Sound: Off</button>
+      <button class="chip" data-sound="on">UI Sound: On</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="chip" data-theme="light">Theme: Light</button>
+      <button class="chip" data-theme="dark">Theme: Dark</button>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  // state
+  const state = {
+    textzoom: localStorage.getItem('textzoom') || '',
+    contrast: localStorage.getItem('contrast') || '',
+    motion:   localStorage.getItem('motion') || '',
+    sound:    localStorage.getItem('sound') || 'off',
+    theme:    localStorage.getItem('theme') || root.getAttribute('data-theme') || 'light'
+  };
+  apply();
+
+  btn.addEventListener('click', ()=>panel.classList.toggle('open'));
+  panel.addEventListener('click', e=>{
+    const c = e.target.closest('.chip'); if(!c) return;
+    ['textzoom','contrast','motion','sound','theme'].forEach(k=>{
+      const v = c.dataset[k]; if(v===undefined) return;
+      state[k] = v; localStorage.setItem(k,v);
+    });
+    apply(); markActive();
+  });
+
+  function apply(){
+    // attributes on :root
+    root.setAttribute('data-textzoom', state.textzoom || '');
+    root.setAttribute('data-contrast', state.contrast || '');
+    root.setAttribute('data-motion',   state.motion || '');
+    root.setAttribute('data-theme',    state.theme || 'light');
+  }
+  function markActive(){
+    panel.querySelectorAll('.chip').forEach(ch=>{
+      let active=false;
+      for(const key of ['textzoom','contrast','motion','sound','theme']){
+        const v=ch.dataset[key]; if(v!==undefined) active = (state[key]===v);
+      }
+      ch.classList.toggle('active', active);
+    });
+  }
+  markActive();
+
+  // Tiny UI blip sound if enabled
+  document.addEventListener('mouseover', e=>{
+    if(state.sound!=='on') return;
+    if(!e.target.closest('.btn, .chip, .menu > li > a, .card')) return;
+    try{
+      const ctx = new (window.AudioContext||window.webkitAudioContext)();
+      const o = ctx.createOscillator(); const g = ctx.createGain();
+      o.type='sine'; o.frequency.value=880;
+      g.gain.value=0.0009; o.connect(g); g.connect(ctx.destination);
+      o.start(); setTimeout(()=>{o.stop(); ctx.close()}, 40);
+    }catch(_){}
+  }, {passive:true});
+})();
+
+// 7) Footer year auto-update
+(function(){
+  const el = document.querySelector('.footer-copy, .copyright');
+  if(!el) return;
+  el.innerHTML = (el.innerHTML||'').replace(/\b20\d{2}\b/, new Date().getFullYear());
+})();
