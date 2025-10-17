@@ -314,4 +314,31 @@ img{max-width:100%;height:auto;display:block}
   .footer-tagline{ font-size:16px; }
   .social-icon svg{ width:24px; height:24px; }
 }
+/* -- FIX: dropdown text invisible -- */
+.site-header .dropdown{
+  color:#0e0e0e;                /* default text color inside panel */
+  background:#fff;
+  z-index: 70;                  /* above hero overlays, just in case */
+}
+
+.site-header .dropdown a{
+  display:block;
+  color:#0e0e0e !important;     /* override any global link color */
+  font-weight:600;
+  font-size:15px;
+  padding:10px 12px;
+  border-radius:10px;
+  text-decoration:none !important;
+}
+
+.site-header .dropdown a:hover{
+  background:#f8fafc;
+  color:var(--green) !important;
+  text-decoration:none !important;
+}
+
+/* optional: ensure top-level hover style doesn't bleed into panel */
+.site-header .main-nav .menu > li > a{
+  color:#0e0e0e;                /* your black uppercase tabs */
+}
 
