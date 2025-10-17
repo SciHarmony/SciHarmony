@@ -180,3 +180,76 @@ img{max-width:100%;height:auto;display:block}
 
 /* keep dropdown from snapping under header on scroll */
 .site-header{overflow:visible}
+
+/* ===== Header layout: center the nav ===== */
+.site-header{
+  display:grid;                /* left = brand, middle = nav, right = anything extra */
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:24px;
+}
+
+.site-header .main-nav{        /* center the whole menu */
+  grid-column:2;
+  justify-self:center;
+}
+
+.main-nav .menu{
+  display:flex;
+  justify-content:center;
+  gap:28px;                    /* space between top-level items */
+  list-style:none;
+  margin:0; padding:0;
+}
+
+/* ===== Top-level menu look: uppercase, bold, black, no underline ===== */
+.main-nav .menu > li > a,
+.main-nav .menu > li > a:visited{
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-weight:700;
+  color:#0e0e0e;               /* solid black-ish */
+  padding:10px 10px;
+  border-radius:10px;
+  text-decoration:none;        /* kill underline */
+}
+
+.main-nav .menu > li > a:hover{
+  background:#f1f5f9;          /* subtle hover tile */
+  color:#0e0e0e;
+  text-decoration:none;
+}
+
+/* dropdown links also black; no underline on hover */
+.dropdown a{ color:#0e0e0e; }
+.dropdown a:hover{ color:var(--green); text-decoration:none; }
+
+/* belt-and-suspenders: never underline header links on hover */
+.site-header a:hover{ text-decoration:none; }
+
+/* ===== Bigger brand (icon + word) ===== */
+.brand img{
+  width:56px; height:56px;     /* was 40px */
+  border-radius:12px;
+}
+.brand .brand-text{
+  font-size:22px;              /* was smaller */
+  font-weight:800;
+  color:#0e0e0e;
+}
+
+/* Button can match the uppercase vibe if you want */
+.btn.donate{ text-transform:uppercase; letter-spacing:.03em; }
+
+/* ===== Responsive sanity so it doesn't explode on phones ===== */
+@media (max-width: 900px){
+  .main-nav .menu{ gap:18px; }
+  .brand img{ width:48px; height:48px; }
+  .brand .brand-text{ font-size:20px; }
+}
+@media (max-width: 640px){
+  .main-nav .menu{ gap:12px; }
+  .brand img{ width:40px; height:40px; }
+  .brand .brand-text{ font-size:18px; }
+}
+
