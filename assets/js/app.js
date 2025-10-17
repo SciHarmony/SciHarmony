@@ -160,3 +160,94 @@ window.addEventListener('load', () => document.body.classList.remove('fade-in'))
   set();
   window.addEventListener('scroll', set, { passive:true });
 })();
+// ===== Mobile Drawer (injects button + menu) =====
+(function(){
+  const header = document.querySelector('.site-header');
+  const nav = document.querySelector('.main-nav');
+  if(!header || !nav) return;
+
+  // Button
+  const btn = document.createElement('button');
+  btn.className = 'nav-toggle';
+  btn.setAttribute('aria-label','Open menu');
+  btn.innerHTML = '<span></span>';
+  header.appendChild(btn);
+
+  // Drawer
+  const drawer = document.createElement('nav');
+  drawer.className = 'drawer';
+  drawer.setAttribute('aria-label','Mobile');
+  drawer.innerHTML = `
+    <div class="group">About</div>
+    <a href="about.html">About Us</a>
+    <a href="faq.html">FAQ</a>
+    <a href="press-kit.html">Press Kit</a>
+    <a href="contact.html">Contact</a>
+    <div class="group">Programs</div>
+    <a href="clinic-prep.html">Clinic-Prep</a>
+    <a href="ortho-lab.html">Ortho Lab</a>
+    <a href="downloads.html">Downloads</a>
+    <div class="group">More</div>
+    <a href="impact.html">Impact</a>
+    <a href="accessibility.html">Accessibility</a>
+    <a class="btn primary" href="get-involved.html#donate" style="display:inline-block;margin-top:6px;">Donate</a>
+  `;
+  document.body.appendChild(drawer);
+
+  function toggle(open){
+    drawer.classList.toggle('open', open);
+    btn.classList.toggle('active', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  btn.addEventListener('click', ()=>toggle(!drawer.classList.contains('open')));
+  drawer.addEventListener('click', e=>{ if(e.target.tagName === 'A') toggle(false); });
+  window.addEventListener('resize', ()=>{ if(window.innerWidth>860) toggle(false); });
+})();
+// ===== Theme: auto + toggle =====
+(function(){
+  const root = document.documentElement;
+  // initial: respect saved pref or system
+  const saved = localStorage.getItem('theme');
+  const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  root.setAttribute('data-theme', saved || (systemDark ? 'dark' : 'light'));
+
+  // inject toggle button
+  const header = document.querySelector('.site-header');
+  if(!header) return;
+  const toggle = document.createElement('button');
+  toggle.className = 'theme-toggle';
+  toggle.type = 'button';
+  toggle.setAttribute('aria-label','Toggle theme');
+  const setLabel = () => toggle.textContent = root.getAttribute('data-theme') === 'dark' ? '☀︎' : '☾';
+  setLabel();
+  header.appendChild(toggle);
+
+  toggle.addEventListener('click', ()=>{
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    setLabel();
+  });
+})();
+// ===== 3D tilt micro-interaction =====
+(function(){
+  const els = document.querySelectorAll('.card, .kpi');
+  els.forEach(el => el.classList.add('tiltable'));
+
+  function tilt(e){
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    const rx = (0.5 - y) * 6;   // max 6deg
+    const ry = (x - 0.5) * 8;   // max 8deg
+    e.currentTarget.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+  }
+  function reset(e){
+    e.currentTarget.style.transform = '';
+  }
+  els.forEach(el=>{
+    el.addEventListener('mousemove', tilt);
+    el.addEventListener('mouseleave', reset);
+    el.addEventListener('touchend', reset, {passive:true});
+  });
+})();
