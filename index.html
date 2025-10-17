@@ -15,16 +15,45 @@
     <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="SciHarmony logo" width="40" height="40" />
     <span class="brand-text">SciHarmony</span>
   </a>
-  <nav class="nav" aria-label="primary">
-    <a href="clinic-prep.html">Clinic-Prep</a>
-    <a href="ortho-lab.html">Ortho Lab</a>
-    <a href="downloads.html">Downloads</a>
-    <a href="impact.html">Impact</a>
-    <a href="accessibility.html">Accessibility</a>
-    <a href="press-kit.html">Press</a>
-    <a href="contact.html">Contact</a>
-    <a class="btn donate" href="get-involved.html#donate">Donate</a>
+
+  <nav class="nav main-nav" aria-label="primary">
+    <ul class="menu" role="menubar">
+
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" aria-haspopup="true" aria-expanded="false">About</a>
+        <div class="dropdown" role="menu" aria-label="About">
+          <a href="about.html" role="menuitem">About Us</a>
+          <a href="faq.html" role="menuitem">FAQ</a>
+          <a href="press-kit.html" role="menuitem">Press Kit</a>
+          <a href="contact.html" role="menuitem">Contact</a>
+        </div>
+      </li>
+
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" aria-haspopup="true" aria-expanded="false">Programs</a>
+        <div class="dropdown" role="menu" aria-label="Programs">
+          <a href="clinic-prep.html" role="menuitem">Clinic-Prep</a>
+          <a href="ortho-lab.html" role="menuitem">Ortho Lab</a>
+          <a href="downloads.html" role="menuitem">Downloads</a>
+        </div>
+      </li>
+
+      <li class="has-dropdown" role="none">
+        <a role="menuitem" aria-haspopup="true" aria-expanded="false">Get Involved</a>
+        <div class="dropdown" role="menu" aria-label="Get Involved">
+          <a href="get-involved.html#volunteer" role="menuitem">Volunteer</a>
+          <a href="get-involved.html#partner" role="menuitem">Partner</a>
+          <a href="get-involved.html#donate" role="menuitem">Donate</a>
+        </div>
+      </li>
+
+      <li role="none"><a role="menuitem" href="impact.html">Impact</a></li>
+      <li role="none"><a role="menuitem" href="accessibility.html">Accessibility</a></li>
+      <li role="none"><a role="menuitem" class="btn donate" href="get-involved.html#donate">Donate</a></li>
+
+    </ul>
   </nav>
+
   <a class="skip-link" href="#main">Skip to content</a>
 </header>
 
@@ -32,7 +61,10 @@
   <div class="hero-inner">
     <div class="small" style="opacity:.85">SciHarmony</div>
     <h1>Inclusive dental STEM that feels calm, clear, and hands-on.</h1>
-    <p class="sub">We build sensory-aware <strong>Clinic-Prep</strong> tools and <strong>orthodontic biomechanics labs</strong> so students can practice first and show up prepared.</p>
+    <p class="sub">
+      We build sensory-aware <strong>Clinic-Prep</strong> tools and <strong>orthodontic biomechanics labs</strong>
+      so students can practice first and show up prepared.
+    </p>
     <div class="cta-row">
       <a class="btn primary" href="clinic-prep.html">Clinic-Prep</a>
       <a class="btn" href="ortho-lab.html">Ortho Lab</a>
@@ -40,15 +72,26 @@
     </div>
   </div>
 </section>
+
 <section class="section">
   <div class="container">
     <div class="cards">
-      <div class="card"><h3>Clinic-Prep Kits</h3><p>Visual schedules, AAC dental boards, quiet-hour scripts, and tool rehearsals at low volume.</p></div>
-      <div class="card"><h3>Ortho Lab</h3><p>Brackets, wires, elastics, spring scales. Predict, measure, reduce error.</p></div>
-      <div class="card"><h3>Partner Clinics</h3><p>Sensory-friendly tours and checklists co-designed with licensed providers.</p></div>
+      <div class="card">
+        <h3>Clinic-Prep Kits</h3>
+        <p>Visual schedules, AAC dental boards, quiet-hour scripts, and tool rehearsals at low volume.</p>
+      </div>
+      <div class="card">
+        <h3>Ortho Lab</h3>
+        <p>Brackets, wires, elastics, spring scales. Predict, measure, reduce error.</p>
+      </div>
+      <div class="card">
+        <h3>Partner Clinics</h3>
+        <p>Sensory-friendly tours and checklists co-designed with licensed providers.</p>
+      </div>
     </div>
   </div>
 </section>
+
 <section class="section">
   <div class="container">
     <div class="kpis" id="impact-counters" aria-live="polite"></div>
