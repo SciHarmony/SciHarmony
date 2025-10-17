@@ -1,4 +1,4 @@
-/* =============== SciHarmony Styles (all-in-one) =============== */
+/* ================= SciHarmony Styles ================= */
 :root{
   --green:#1C7C54;
   --green2:#69C39B;
@@ -6,11 +6,10 @@
   --muted:#475569;
 }
 
-/* Base */
 *{box-sizing:border-box}
+html,body{margin:0}
 body{
-  margin:0;
-  font-family:system-ui,-apple-system,'Segoe UI',Inter,Roboto,Arial,sans-serif;
+  font-family:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   color:var(--ink);
   background:#fff;
   line-height:1.6;
@@ -19,136 +18,161 @@ img{max-width:100%;height:auto;display:block}
 a{color:var(--green);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* =================== Header / Nav =================== */
+/* Focus styles (accessibility) */
+:focus-visible{outline:3px solid #69C39B; outline-offset:2px; border-radius:8px}
+
+/* ================= Header / Nav ================= */
 .site-header{
-  position:sticky;top:0;z-index:50;
-  background:#ffffffcc;backdrop-filter:blur(6px);
+  position:sticky; top:0; z-index:50;
+  background:#ffffffcc; backdrop-filter:blur(6px);
   border-bottom:1px solid #e5e7eb;
-  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:24px;
   padding:12px 16px;
 }
+.brand{display:flex; align-items:center; gap:10px; font-weight:800; color:#0e0e0e}
+.brand img{width:56px; height:56px; border-radius:12px}
+.brand .brand-text{font-family:'Manrope', sans-serif; font-size:22px; color:#0e0e0e}
 
-/* Brand */
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:#0e0e0e}
-.brand img{width:56px;height:56px;border-radius:12px}
-.brand .brand-text{font-size:22px;color:#0e0e0e}
+/* Centered nav like your example */
+.main-nav{grid-column:2; justify-self:center}
+.main-nav .menu{display:flex; justify-content:center; gap:28px; list-style:none; margin:0; padding:0}
 
-/* Top-level nav centered */
-.main-nav{grid-column:2;justify-self:center}
-.main-nav .menu{display:flex;justify-content:center;gap:28px;list-style:none;margin:0;padding:0}
-
-/* Tabs (uppercase, bold, black, no underline) */
+/* Tabs (uppercase, black, no underline) */
 .main-nav .menu > li > a,
 .main-nav .menu > li > a:visited{
-  text-transform:uppercase;letter-spacing:.06em;font-weight:700;
-  color:#0e0e0e;padding:10px 10px;border-radius:10px;text-decoration:none;
+  text-transform:uppercase; letter-spacing:.06em; font-weight:800; font-family:'Manrope', sans-serif;
+  color:#0e0e0e; padding:10px 10px; border-radius:10px; text-decoration:none;
 }
-.main-nav .menu > li > a:hover{background:#f1f5f9;color:#0e0e0e;text-decoration:none}
+.main-nav .menu > li > a:hover{background:#f1f5f9; color:#0e0e0e; text-decoration:none}
 
-/* Dropdown panel */
-.dropdown{
-  position:absolute;top:100%;left:0;min-width:260px;
-  background:#fff;border:1px solid #e5e7eb;border-radius:12px;
-  box-shadow:0 18px 36px rgba(2,8,23,.12), 0 6px 16px rgba(2,8,23,.08);
-  padding:8px;display:grid;gap:4px;
-  opacity:0;transform:translateY(8px);pointer-events:none;transition:.16s ease;
-  z-index:70;color:#0e0e0e;  /* default text color inside dropdown */
-}
+/* Dropdowns */
 .has-dropdown{position:relative}
-.has-dropdown:hover > .dropdown,
-.has-dropdown:focus-within > .dropdown{opacity:1;transform:translateY(0);pointer-events:auto}
-.has-dropdown:hover > a,
-.has-dropdown:focus-within > a{background:#f1f5f9}
-
-/* Dropdown links (force visible) */
-.site-header .dropdown a{
-  display:block;color:#0e0e0e !important;font-weight:600;font-size:15px;
-  padding:10px 12px;border-radius:10px;text-decoration:none !important;
+.dropdown{
+  position:absolute; top:100%; left:0; min-width:260px;
+  background:#fff; border:1px solid #e5e7eb; border-radius:12px;
+  box-shadow:0 18px 36px rgba(2,8,23,.12), 0 6px 16px rgba(2,8,23,.08);
+  padding:8px; display:grid; gap:4px;
+  opacity:0; transform:translateY(8px) scale(.98); pointer-events:none; transition:.16s ease;
+  z-index:70; color:#0e0e0e;
 }
-.site-header .dropdown a:hover{background:#f8fafc;color:var(--green) !important;text-decoration:none !important}
+.has-dropdown:hover > .dropdown,
+.has-dropdown:focus-within > .dropdown{opacity:1; transform:translateY(0) scale(1); pointer-events:auto}
+.site-header .dropdown a{
+  display:block; color:#0e0e0e !important; font-weight:600; font-size:15px;
+  padding:10px 12px; border-radius:10px; text-decoration:none !important;
+}
+.site-header .dropdown a:hover{background:#f8fafc; color:var(--green) !important}
 
 /* Buttons */
-.btn{padding:10px 16px;border-radius:12px;border:1px solid #e5e7eb;background:#fff}
-.btn.primary,.btn.donate{background:var(--green);border-color:var(--green);color:#fff !important;text-transform:uppercase;letter-spacing:.03em}
+.btn{
+  padding:10px 16px; border-radius:12px; border:1px solid #e5e7eb; background:#fff;
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn.primary,.btn.donate{background:var(--green); border-color:var(--green); color:#fff !important; text-transform:uppercase; letter-spacing:.03em}
+.btn:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.skip-link{position:absolute; left:-9999px}
+.skip-link:focus{left:12px; top:12px; background:#000; color:#fff; padding:8px 10px; z-index:999; border-radius:8px}
 
-/* kill any underline in header on hover */
-.site-header a:hover{text-decoration:none}
-
-/* =================== Hero (dental, layered, parallax) =================== */
+/* ================= Hero (dental, layered, parallax-ready) ================= */
 .hero{
-  min-height:62vh;display:grid;place-items:center;text-align:center;
-  color:#fff;position:relative;overflow:hidden;
-
-  /* 3 stacked backgrounds: ribbons, tiled icons, deep gradient */
+  min-height:62vh; display:grid; place-items:center; text-align:center;
+  color:#fff; position:relative; overflow:hidden;
+  /* You can use layered images or swap to a single hero if you want */
   background:
     url('../images/hero-fg.svg') center / cover no-repeat,
     url('../images/hero-icons-tile.svg') center / 420px 420px repeat,
     url('../images/hero-bg.svg') center / cover no-repeat;
-
   background-attachment: scroll, fixed, fixed;
 }
-.hero::before{content:none}
 .hero::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,.28), rgba(0,0,0,.6));
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to bottom, rgba(0,0,0,.24), rgba(0,0,0,.62));
   pointer-events:none;
 }
-.hero-inner{position:relative;padding:80px 16px;max-width:980px;z-index:1}
-.hero h1{font-size:clamp(40px,6vw,72px);font-weight:300;letter-spacing:.02em;margin:.1em auto .2em;max-width:18ch}
-.hero p.sub{font-size:clamp(18px,2.2vw,24px);opacity:.95;margin:0 auto 22px;max-width:48ch}
-.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-inner{position:relative; padding:88px 16px; max-width:980px; z-index:1}
+.hero h1{
+  font-size:clamp(42px,6.4vw,76px); font-weight:800; font-family:'Manrope', sans-serif;
+  letter-spacing:.01em; margin:.1em auto .25em; max-width:18ch;
+}
+.hero p.sub{font-size:clamp(18px,2.2vw,24px); opacity:.95; margin:0 auto 22px; max-width:48ch}
+.cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+.animate-fadeUp{animation:fadeUp 1s ease forwards}
+@keyframes fadeUp{ from{opacity:0; transform:translateY(40px)} to{opacity:1; transform:translateY(0)} }
 
-/* =================== Sections / Cards =================== */
-.section{padding:48px 16px}
-.container{max-width:1100px;margin:0 auto;padding:24px 16px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
-.card{background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
-.card h3{margin:.2em 0 .2em;font-size:20px}
-.card p{color:var(--muted);margin:.2em 0 0}
+/* Mission strip */
+.mission{
+  background:linear-gradient(90deg, var(--green), var(--green2));
+  color:#fff; text-align:center; padding:16px 10px; font-weight:600; letter-spacing:.03em;
+}
+
+/* ================= Sections / Cards ================= */
+.section{padding:64px 16px}
+.section.alt{background:#f8fbf9}
+.container{max-width:1100px; margin:0 auto; padding:0 16px}
+
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:12px}
+.card{
+  background:#fff; border:1px solid #e5e7eb; border-radius:18px; padding:20px;
+  box-shadow:0 6px 18px rgba(0,0,0,.04); transition:transform .16s ease, box-shadow .16s ease;
+}
+.card h3{margin:.2em 0 .2em; font-size:22px; font-family:'Manrope', sans-serif}
+.card p{color:var(--muted); margin:.35em 0 0}
+.lift:hover{transform:translateY(-4px); box-shadow:0 16px 30px rgba(0,0,0,.08)}
 
 /* KPIs */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:18px}
-.kpi{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:14px;text-align:center}
-.kpi .num{font-size:28px;font-weight:700}
-.kpi .lbl{font-size:14px;color:var(--muted)}
+.kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin-top:14px}
+.kpi{background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:16px; text-align:center}
+.kpi .num{font-size:30px; font-weight:800; font-family:'Manrope', sans-serif}
+.kpi .lbl{font-size:14px; color:var(--muted)}
 
-/* =================== Fancy Gradient Footer =================== */
+/* Reveal on scroll */
+.reveal{opacity:0; transform:translateY(26px); transition:opacity .4s ease, transform .4s ease}
+.revealed{opacity:1; transform:translateY(0)}
+
+/* ================= Gradient Footer (shimmer) ================= */
 .site-footer{
-  background: linear-gradient(135deg, #1C7C54, #69C39B);
-  color:#fff;text-align:center;padding:60px 20px;border-top:none;
+  --grad1:#1C7C54; --grad2:#69C39B;
+  background: linear-gradient(135deg, var(--grad1), var(--grad2));
+  color:#fff; text-align:center; padding:70px 20px; border-top:none;
+  position:relative; overflow:hidden;
   font-family:'Inter', system-ui, sans-serif;
 }
-.footer-main{
-  display:flex;flex-direction:column;align-items:center;gap:18px;
-  max-width:800px;margin:0 auto;
+.site-footer::before{
+  content:""; position:absolute; inset:-40% -20%;
+  background: radial-gradient(60% 60% at 30% 40%, rgba(255,255,255,.16), transparent 60%),
+              radial-gradient(40% 40% at 80% 20%, rgba(255,255,255,.10), transparent 60%);
+  animation: shimmer 16s linear infinite;
 }
-.footer-title{font-size:36px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin:0}
-.footer-tagline{font-size:18px;font-weight:400;opacity:.9;margin:0}
-.footer-socials{display:flex;gap:26px;justify-content:center;margin-top:16px}
+@keyframes shimmer{ from{transform:translateX(-6%)} to{transform:translateX(6%)} }
+
+.footer-main{ position:relative; display:flex; flex-direction:column; align-items:center; gap:18px; max-width:860px; margin:0 auto }
+.footer-title{font-size:36px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; margin:0; font-family:'Manrope', sans-serif}
+.footer-tagline{font-size:18px; opacity:.92; margin:0}
+.footer-socials{display:flex; gap:26px; justify-content:center; margin-top:16px}
 .social-icon svg{transition:transform .2s ease, opacity .2s ease}
-.social-icon:hover svg{transform:scale(1.15);opacity:.85}
-.footer-copy{margin-top:30px;font-size:14px;opacity:.8}
+.social-icon:hover svg{transform:scale(1.15); opacity:.85}
+.footer-copy{margin-top:30px; font-size:14px; opacity:.85}
 
-/* 404 helpers */
-.small{font-size:13px;color:var(--muted)}
-.center404{min-height:60vh;display:grid;place-items:center;text-align:center}
-.center404 .ops{font-size:clamp(36px,6vw,64px);font-weight:300;margin:.1em 0}
-.center404 p{margin:0 0 18px;color:#475569}
-.center404 .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+/* Utilities */
+.small{font-size:13px; color:var(--muted)}
+.visually-hidden{position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap}
 
-/* =================== Responsive =================== */
+/* ================= Overrides to murder ghost-white text ================= */
+.site-header .dropdown{ background:#fff; color:#0e0e0e; z-index:70 }
+.site-header .dropdown a{ color:#0e0e0e !important; text-decoration:none !important; }
+.site-header .dropdown a:hover{ color:var(--green) !important; text-decoration:none !important; }
+
+/* ================= Responsive ================= */
 @media (max-width:900px){
   .main-nav .menu{gap:18px}
-  .brand img{width:48px;height:48px}
+  .brand img{width:48px; height:48px}
   .brand .brand-text{font-size:20px}
 }
 @media (max-width:640px){
   .main-nav .menu{gap:12px}
-  .brand img{width:40px;height:40px}
+  .brand img{width:40px; height:40px}
   .brand .brand-text{font-size:18px}
   .footer-title{font-size:28px}
   .footer-tagline{font-size:16px}
-  .social-icon svg{width:24px;height:24px}
+  .social-icon svg{width:24px; height:24px}
 }
-
-
