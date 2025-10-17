@@ -564,3 +564,22 @@ document.body.classList.add('page-fade');
   }, { threshold: 0.28 });
   sections.forEach(s => obs.observe(s));
 })();
+// Hero headline: split into words (with proper spacing via margin)
+(function(){
+  const h = document.querySelector('.hero h1');
+  if(!h) return;
+
+  const txt = h.textContent.trim().replace(/\s+/g,' ');
+  const words = txt.split(' ');
+
+  h.textContent = '';
+  h.classList.add('split');
+
+  words.forEach((w, i) => {
+    const span = document.createElement('span');
+    span.className = 'word';
+    span.textContent = w;                  // no trailing spaces
+    span.style.animationDelay = (0.06 * i) + 's';
+    h.appendChild(span);
+  });
+})();
