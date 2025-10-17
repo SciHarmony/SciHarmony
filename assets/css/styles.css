@@ -13,10 +13,10 @@ body{
   color:var(--ink);
   background:#fff;
   line-height:1.6;
-  opacity:0;                    /* will fade to 1 when .loaded is added */
+  opacity:1;                    /* will fade to 1 when .loaded is added */
   transition:opacity .6s ease;
 }
-body.loaded{ opacity:1; }
+body.fade-in{ opacity:0; }
 
 *{box-sizing:border-box}
 img{max-width:100%;height:auto;display:block}
