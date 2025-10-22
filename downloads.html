@@ -1,65 +1,118 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Downloads — SciHarmony</title>
-  <meta name="description" content="SciHarmony — Clinic-Prep and Ortho Lab: inclusive dental STEM." />
+  <meta name="description" content="Download sensory-friendly Clinic-Prep and Ortho Lab resources for inclusive dental STEM." />
   <link rel="icon" href="assets/logo/favicon-sciharmony-dental-green.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/styles.css" />
-  
+  <meta name="theme-color" content="#ffffff" />
 </head>
+
 <body>
 
-<header class="site-header">
-  <a class="brand" href="index.html" aria-label="SciHarmony home">
-    <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="SciHarmony logo" width="40" height="40" />
-    <span class="brand-text">SciHarmony</span>
-  </a>
-  <nav class="nav" aria-label="primary">
-    <a href="clinic-prep.html">Clinic-Prep</a>
-    <a href="ortho-lab.html">Ortho Lab</a>
-    <a href="downloads.html" aria-current="page">Downloads</a>
-    <a href="impact.html">Impact</a>
-    <a href="accessibility.html">Accessibility</a>
-    <a href="press-kit.html">Press</a>
-    <a href="contact.html">Contact</a>
-    <a class="btn donate" href="get-involved.html#donate">Donate</a>
-  </nav>
-  <a class="skip-link" href="#main">Skip to content</a>
-</header>
+  <!-- Header (same across site) -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="SciHarmony home">
+      <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="" width="40" height="40" />
+      <span class="brand-text">SciHarmony</span>
+    </a>
 
-<main id="main" class="container">
+    <nav class="main-nav" aria-label="Primary">
+      <ul class="menu">
+        <li class="has-dropdown">
+          <a href="about.html" aria-expanded="false">ABOUT</a>
+          <div class="dropdown">
+            <a href="about.html">About Us</a>
+            <a href="faq.html">FAQ</a>
+            <a href="press-kit.html">Press Kit</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </li>
+        <li class="has-dropdown">
+          <a href="programs.html" aria-expanded="false">PROGRAMS</a>
+          <div class="dropdown">
+            <a href="clinic-prep.html">Clinic-Prep</a>
+            <a href="ortho-lab.html">Ortho Lab</a>
+            <a href="downloads.html" aria-current="page">Downloads</a>
+          </div>
+        </li>
+        <li><a href="impact.html">IMPACT</a></li>
+        <li><a href="accessibility.html">ACCESSIBILITY</a></li>
+      </ul>
+      <a class="btn donate" href="get-involved.html#donate">DONATE</a>
+    </nav>
+  </header>
 
-<h1>Downloads</h1>
-<p>Open materials you can reuse. Replace these placeholders with your real PDFs when ready.</p>
-<ul>
-  <li>Visual schedule (PDF) — <em>coming soon</em></li>
-  <li>AAC dental board (PDF) — <em>coming soon</em></li>
-  <li>Sensory-friendly hour checklist (PDF) — <em>coming soon</em></li>
-  <li>Ortho Lab rig build guide (PDF) — <em>coming soon</em></li>
-  <li>Force lab cards (PDF) — <em>coming soon</em></li>
-  <li>CSV data template — <code>downloads/data-template.csv</code> (add later)</li>
-</ul>
-
-</main>
-
-<footer class="site-footer">
-  <div class="footer-grid">
-    <div><strong>SciHarmony</strong><br/>Clinic-Prep & Ortho Lab — inclusive dental STEM</div>
-    <div>
-      <a href="mailto:hello@sciharmony.org">hello@sciharmony.org</a><br/>
-      <a href="privacy.html">Privacy</a>
+  <!-- Hero section -->
+  <section class="hero hero--small" role="banner">
+    <div class="hero-inner">
+      <h1>Downloads</h1>
+      <p class="sub">Open, reusable tools for sensory-aware dental STEM programs.</p>
     </div>
-    <div class="socials">
-      <a href="#" aria-label="Instagram">Instagram</a>
-      <a href="#" aria-label="LinkedIn">LinkedIn</a>
-      <a href="#" aria-label="YouTube">YouTube</a>
-    </div>
-  </div>
-  <p class="copyright">© 2025 SciHarmony. Made with students.</p>
-</footer>
+  </section>
 
-<script src="assets/js/app.js" defer></script>
+  <main id="main" class="section">
+    <div class="container">
+
+      <section class="reveal">
+        <p>Access templates and printable resources from SciHarmony’s Clinic-Prep and Ortho Lab modules. All files are open for classroom and clinic use.</p>
+      </section>
+
+      <section class="reveal">
+        <h2>Available Resources</h2>
+        <ul>
+          <li>Visual Schedule (PDF) — <em>coming soon</em></li>
+          <li>AAC Dental Board (PDF) — <em>coming soon</em></li>
+          <li>Sensory-Friendly Hour Checklist (PDF) — <em>coming soon</em></li>
+          <li>Ortho Lab Rig Build Guide (PDF) — <em>coming soon</em></li>
+          <li>Force Lab Cards (PDF) — <em>coming soon</em></li>
+          <li>CSV Data Template — <code>downloads/data-template.csv</code></li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Unified footer -->
+  <footer class="site-footer">
+    <div class="footer-main" style="text-align:center;max-width:960px;margin:0 auto;padding:28px 16px;">
+      <h2 class="footer-title" style="margin:0 0 8px 0;letter-spacing:.06em">SCIHARMONY</h2>
+      <p class="footer-tagline">Clinic-Prep &amp; Ortho Lab — Inclusive Dental STEM</p>
+
+      <div class="footer-socials" style="display:flex;gap:18px;justify-content:center;margin:14px 0 6px">
+        <a href="#" aria-label="Instagram" class="social-icon" title="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="social-icon" title="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v15H0V8zm7.5 0h4.8v2.05h.07c.67-1.27 2.3-2.6 4.74-2.6 5.07 0 6 3.34 6 7.69V23H18V16.1c0-1.65-.03-3.76-2.3-3.76-2.3 0-2.65 1.8-2.65 3.64V23H7.5V8z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube" class="social-icon" title="YouTube">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.3 3.6 12 3.6 12 3.6s-7.3 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c2.1.5 9.4.5 9.4.5s7.3 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="footer-badge" style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 14px;color:#fff;opacity:.95">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2l2.09 6.26h6.58l-5.32 3.86 2.03 6.24L12 15.77 6.62 18.36l2.03-6.24L3.33 8.26h6.58L12 2z"/>
+        </svg>
+        <span>Made with students</span>
+      </div>
+
+      <p class="footer-copy" style="margin-top:12px">© 2025 SciHarmony. Made with students.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js" defer></script>
 </body>
 </html>
