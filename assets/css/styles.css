@@ -648,3 +648,67 @@ body { cursor: auto !important; }
 @media (hover:none), (pointer:coarse){
   .cursor-ring{ display:none; }
 }
+/* ===== NAV LAYOUT: fix donate pill position on all pages ===== */
+.site-header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.brand{ flex:0 0 auto; }
+
+.main-nav{
+  /* override any old .nav margins from earlier builds */
+  margin-left:0 !important;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex:1 1 auto;
+  flex-wrap:nowrap;                 /* <- do not wrap */
+}
+
+/* Center the menu block; keep it from hogging 100% width */
+.main-nav .menu{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  list-style:none;
+  padding:0;
+  margin:0 auto;                    /* <- centers menu */
+  flex:0 1 auto;
+}
+
+/* Uppercase, bold, no underline-on-hover */
+.main-nav .menu > li > a{
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  font-weight:700;
+  color:var(--ink);
+  text-decoration:none;
+}
+.main-nav .menu > li > a:hover{ text-decoration:none; }
+
+/* Donate pill pinned to the far right, never wraps */
+.main-nav .btn.donate{
+  margin-left:auto;                 /* <- pushes to right edge */
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+
+/* Dropdown stays positioned with its parent, not affecting flow */
+.main-nav .has-dropdown{ position:relative; }
+.main-nav .has-dropdown .dropdown{
+  position:absolute;
+  top:100%;
+  left:0;
+}
+
+/* Tighten spacing at mid widths so it still fits on one line */
+@media (max-width:1100px){
+  .main-nav .menu{ gap:16px; }
+}
+
+/* Hide desktop Donate when the mobile drawer is active */
+@media (max-width:860px){
+  .main-nav .btn.donate{ display:none; }
+}
