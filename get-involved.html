@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -7,112 +7,142 @@
   <meta name="description" content="Volunteer, partner, or donate to support Clinic-Prep and Ortho Lab."/>
   <link rel="icon" href="assets/logo/favicon-sciharmony-dental-green.svg" type="image/svg+xml"/>
   <link rel="stylesheet" href="assets/css/styles.css"/>
+  <meta name="theme-color" content="#ffffff"/>
 </head>
 <body>
 
-<header class="site-header">
-  <a class="brand" href="index.html" aria-label="SciHarmony home">
-    <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="SciHarmony logo" width="40" height="40"/>
-    <span class="brand-text">SciHarmony</span>
-  </a>
+  <!-- Unified header (centered tabs, DONATE right; mobile drawer handled in app.js) -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="SciHarmony home">
+      <img src="assets/logo/logo-sciharmony-dental-green.svg" alt="" width="40" height="40"/>
+      <span class="brand-text">SciHarmony</span>
+    </a>
 
-  <nav class="nav main-nav" aria-label="primary">
-    <ul class="menu" role="menubar">
+    <nav class="main-nav" aria-label="Primary">
+      <ul class="menu" role="menubar">
+        <li class="has-dropdown" role="none">
+          <a href="about.html" role="menuitem" aria-haspopup="true" aria-expanded="false">ABOUT</a>
+          <div class="dropdown" role="menu" aria-label="About">
+            <a href="about.html" role="menuitem">About Us</a>
+            <a href="faq.html" role="menuitem">FAQ</a>
+            <a href="press-kit.html" role="menuitem">Press Kit</a>
+            <a href="contact.html" role="menuitem">Contact</a>
+          </div>
+        </li>
 
-      <li class="has-dropdown" role="none">
-        <a role="menuitem" aria-haspopup="true" aria-expanded="false">About</a>
-        <div class="dropdown" role="menu" aria-label="About">
-          <a href="about.html" role="menuitem">About Us</a>
-          <a href="faq.html" role="menuitem">FAQ</a>
-          <a href="press-kit.html" role="menuitem">Press Kit</a>
-          <a href="contact.html" role="menuitem">Contact</a>
-        </div>
-      </li>
+        <li class="has-dropdown" role="none">
+          <a href="programs.html" role="menuitem" aria-haspopup="true" aria-expanded="false">PROGRAMS</a>
+          <div class="dropdown" role="menu" aria-label="Programs">
+            <a href="clinic-prep.html" role="menuitem">Clinic-Prep</a>
+            <a href="ortho-lab.html" role="menuitem">Ortho Lab</a>
+            <a href="downloads.html" role="menuitem">Downloads</a>
+          </div>
+        </li>
 
-      <li class="has-dropdown" role="none">
-        <a role="menuitem" aria-haspopup="true" aria-expanded="false">Programs</a>
-        <div class="dropdown" role="menu" aria-label="Programs">
-          <a href="clinic-prep.html" role="menuitem">Clinic-Prep</a>
-          <a href="ortho-lab.html" role="menuitem">Ortho Lab</a>
-          <a href="downloads.html" role="menuitem">Downloads</a>
-        </div>
-      </li>
+        <li class="has-dropdown" role="none">
+          <a href="get-involved.html" role="menuitem" aria-haspopup="true" aria-expanded="false" aria-current="page">GET INVOLVED</a>
+          <div class="dropdown" role="menu" aria-label="Get Involved">
+            <a href="#volunteer" role="menuitem">Volunteer</a>
+            <a href="#partner" role="menuitem">Partner</a>
+            <a href="#donate" role="menuitem">Donate</a>
+          </div>
+        </li>
 
-      <li class="has-dropdown" role="none">
-        <a role="menuitem" aria-haspopup="true" aria-expanded="false">Get Involved</a>
-        <div class="dropdown" role="menu" aria-label="Get Involved">
-          <a href="#volunteer" role="menuitem">Volunteer</a>
-          <a href="#partner" role="menuitem">Partner</a>
-          <a href="#donate" role="menuitem">Donate</a>
-        </div>
-      </li>
+        <li role="none"><a role="menuitem" href="impact.html">IMPACT</a></li>
+        <li role="none"><a role="menuitem" href="accessibility.html">ACCESSIBILITY</a></li>
+      </ul>
 
-      <li role="none"><a role="menuitem" href="impact.html">Impact</a></li>
-      <li role="none"><a role="menuitem" href="accessibility.html">Accessibility</a></li>
-      <li role="none"><a role="menuitem" class="btn donate" href="#donate">Donate</a></li>
+      <a class="btn donate" href="#donate">DONATE</a>
+    </nav>
+  </header>
 
-    </ul>
-  </nav>
-
-  <a class="skip-link" href="#main">Skip to content</a>
-</header>
-
-<main id="main" class="container">
-  <h1>Get Involved</h1>
-  <p>Three ways to help inclusive dental STEM spread without chaos.</p>
-
-  <h2 id="volunteer">Volunteer</h2>
-  <ul>
-    <li><strong>Facilitator</strong> — run Clinic-Prep stations (mirror, suction sound, visual schedule) or Ortho Lab rigs.</li>
-    <li><strong>Design</strong> — help update visual cards, AAC boards, and lab sheets.</li>
-    <li><strong>Data</strong> — log preparedness scores, tolerance seconds, and force readings.</li>
-  </ul>
-  <p>Email <a href="mailto:hello@sciharmony.org">hello@sciharmony.org</a> with the subject “Volunteer.”</p>
-
-  <h2 id="partner">Partner</h2>
-  <p>Schools, libraries, and clinics: host a workshop, quiet-hour tools tour, or a 3-session Ortho Lab. We bring materials and training.</p>
-  <ul>
-    <li>Clinic-Prep: 60 min, caregivers attend</li>
-    <li>Ortho Lab: 60 min, 12–24 students, 4 rigs</li>
-    <li>We share a one-page report after each event</li>
-  </ul>
-  <p>Email <a href="mailto:hello@sciharmony.org">hello@sciharmony.org</a> with the subject “Partner.”</p>
-
-  <h2 id="donate">Donate</h2>
-  <p>$10 funds one Clinic-Prep kit; $180 buys a full Ortho Lab rig. Sponsors appear on our site and receive an impact snapshot.</p>
-  <p><a class="btn primary" href="https://example.org/donate">Give now</a></p>
-
-  <h2>Receipts you get</h2>
-  <ul>
-    <li>Session metrics: preparedness delta, mirror-tolerance seconds, or force error drop</li>
-    <li>Photos with faces blurred and consented</li>
-    <li>Thank-you note and line-item budget</li>
-  </ul>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-main">
-    <h2 class="footer-title">SciHarmony</h2>
-    <p class="footer-tagline">Clinic-Prep & Ortho Lab — Inclusive Dental STEM</p>
-
-    <div class="footer-socials">
-      <a href="#" aria-label="Instagram" class="social-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
-          <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-1a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
-        </svg>
-      </a>
-      <a href="#" aria-label="LinkedIn" class="social-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
-          <path d="M20 2H4C2.897 2 2 2.897 2 4v16c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM8.339 18H5.661V9h2.678v9zM7 7.433c-.837 0-1.517-.679-1.517-1.516A1.517 1.517 0 017 4.4c.837 0 1.516.679 1.516 1.517A1.517 1.517 0 017 7.433zM19 18h-2.667v-4.604c0-1.098-.021-2.511-1.529-2.511-1.53 0-1.765 1.194-1.765 2.429V18h-2.666V9h2.56v1.233h.037c.357-.676 1.229-1.389 2.533-1.389 2.709 0 3.197 1.782 3.197 4.099V18z"/>
-        </svg>
-      </a>
-      <a href="#" aria-label="YouTube" class="social-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
-          <path d="M19.615 3.184C18.493 2.646 12 2.646 12 2.646s-6.493 0-7.615.538C3.354 3.72 3 5.17 3 5.17S2.646 7.015 2.646 9v6c0 1.985.354 3.83.739 4.83.743.538 7.615.538 7.615.538s6.493 0 7.615-.538c.621-.538.739-1.985.739-1.985s.354-1.845.354-3.83v-6c0-1.985-.354-3.83-.739-4.83zM10 15V9l5 3-5 3z"/>
-        </svg>
-      </a>
+  <!-- Small hero to keep consistency with other pages -->
+  <section class="hero hero--small" role="banner">
+    <div class="hero-inner">
+      <h1>Get Involved</h1>
+      <p class="sub">Three ways to help inclusive dental STEM spread without chaos.</p>
     </div>
+  </section>
 
-    <p class="footer-copy">© 2025 SciHarmony. Made with students.</p>
-  </div>
-</footer>
+  <main id="main" class="section">
+    <div class="container">
+      <section class="reveal">
+        <h2 id="volunteer">Volunteer</h2>
+        <ul>
+          <li><strong>Facilitator</strong> — run Clinic-Prep stations (mirror, suction sound, visual schedule) or Ortho Lab rigs.</li>
+          <li><strong>Design</strong> — help update visual cards, AAC boards, and lab sheets.</li>
+          <li><strong>Data</strong> — log preparedness scores, tolerance seconds, and force readings.</li>
+        </ul>
+        <p>Email <a href="mailto:hello@sciharmony.org">hello@sciharmony.org</a> with the subject “Volunteer.”</p>
+      </section>
+
+      <section class="reveal" style="margin-top:22px">
+        <h2 id="partner">Partner</h2>
+        <p>Schools, libraries, and clinics: host a workshop, quiet-hour tools tour, or a 3-session Ortho Lab. We bring materials and training.</p>
+        <ul>
+          <li>Clinic-Prep: 60 min, caregivers attend</li>
+          <li>Ortho Lab: 60 min, 12–24 students, 4 rigs</li>
+          <li>We share a one-page report after each event</li>
+        </ul>
+        <p>Email <a href="mailto:hello@sciharmony.org">hello@sciharmony.org</a> with the subject “Partner.”</p>
+      </section>
+
+      <section class="reveal" style="margin-top:22px">
+        <h2 id="donate">Donate</h2>
+        <p>$10 funds one Clinic-Prep kit; $180 buys a full Ortho Lab rig. Sponsors appear on our site and receive an impact snapshot.</p>
+        <p><a class="btn primary" href="https://example.org/donate">Give now</a></p>
+      </section>
+
+      <section class="reveal" style="margin-top:22px">
+        <h2>Receipts you get</h2>
+        <ul>
+          <li>Session metrics: preparedness delta, mirror-tolerance seconds, or force error drop</li>
+          <li>Photos with faces blurred and consented</li>
+          <li>Thank-you note and line-item budget</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <!-- Unified gradient footer with inline white icons -->
+  <footer class="site-footer">
+    <div class="footer-main" style="text-align:center;max-width:960px;margin:0 auto;padding:28px 16px;">
+      <h2 class="footer-title" style="margin:0 0 8px 0;letter-spacing:.06em">SCIHARMONY</h2>
+      <p class="footer-tagline">Clinic-Prep &amp; Ortho Lab — Inclusive Dental STEM</p>
+
+      <div class="footer-socials" style="display:flex;gap:18px;justify-content:center;margin:14px 0 6px">
+        <a href="#" aria-label="Instagram" class="social-icon" title="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="social-icon" title="LinkedIn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v15H0V8zm7.5 0h4.8v2.05h.07c.67-1.27 2.3-2.6 4.74-2.6 5.07 0 6 3.34 6 7.69V23H18V16.1c0-1.65-.03-3.76-2.3-3.76-2.3 0-2.65 1.8-2.65 3.64V23H7.5V8z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube" class="social-icon" title="YouTube">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.3 3.6 12 3.6 12 3.6s-6.493 0-7.615.538C3.354 3.72 3 5.17 3 5.17S2.646 7.015 2.646 9v6c0 1.985.354 3.83.739 4.83.743.538 7.615.538 7.615.538s6.493 0 7.615-.538c.621-.538.739-1.985.739-1.985s.354-1.845.354-3.83v-6c0-1.985-.354-3.83-.739-4.83zM9.6 15.5v-7l6.2 3.5-6.2 3.5z"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="footer-badge" style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:8px 14px;color:#fff;opacity:.95">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2l2.09 6.26h6.58l-5.32 3.86 2.03 6.24L12 15.77 6.62 18.36l2.03-6.24L3.33 8.26h6.58L12 2z"/>
+        </svg>
+        <span>Made with students</span>
+      </div>
+
+      <p class="copyright" style="margin-top:12px">© 2025 SciHarmony. Made with students.</p>
+    </div>
+  </footer>
+
+  <!-- App bundle (dropdowns, dark mode toggle, mobile drawer, cursor ring, etc.) -->
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
