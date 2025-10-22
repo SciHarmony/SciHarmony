@@ -712,3 +712,78 @@ body { cursor: auto !important; }
 @media (max-width:860px){
   .main-nav .btn.donate{ display:none; }
 }
+/* ===== Mobile header behavior: show drawer only, hide desktop menu ===== */
+
+/* Drawer toggle button (JS injects .nav-toggle; keep it styled + visible on mobile) */
+.nav-toggle{
+  display:none;                 /* desktop default */
+  align-items:center;
+  justify-content:center;
+  width:42px; height:42px;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  margin-left:auto;             /* push it to the right edge */
+  z-index:60;
+}
+.nav-toggle span,
+.nav-toggle span::before,
+.nav-toggle span::after{
+  content:"";
+  display:block;
+  width:18px; height:2px;
+  background:var(--ink);
+  border-radius:2px;
+  position:relative;
+}
+.nav-toggle span::before{ top:-6px; position:absolute; }
+.nav-toggle span::after{  top: 6px; position:absolute; }
+
+/* Drawer panel (already injected by JS; styles here make it look good) */
+.drawer{
+  position:fixed;
+  top:calc(env(safe-area-inset-top) + 56px);
+  right:16px;
+  width:88vw; max-width:360px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  box-shadow:0 16px 40px rgba(0,0,0,.18);
+  padding:14px 14px 10px;
+  transform:translateY(-8px) scale(.98);
+  opacity:0; pointer-events:none;
+  transition:transform .18s ease, opacity .18s ease;
+  z-index:70;
+}
+.drawer.open{ transform:none; opacity:1; pointer-events:auto; }
+.drawer .group{
+  font-weight:700; font-size:12px; letter-spacing:.08em;
+  color:var(--muted); text-transform:uppercase;
+  padding:8px 6px 6px;
+}
+.drawer a{
+  display:block; padding:10px 8px; border-radius:10px;
+  color:var(--ink); text-decoration:none;
+}
+.drawer a:hover{ background:#f5f7f9; }
+
+/* Hide desktop nav links/donate on small screens; show toggle */
+@media (max-width: 860px){
+  .site-header{ gap:10px; }
+  .main-nav .menu{ display:none !important; }
+  .main-nav .btn.donate{ display:none !important; }
+  .nav-toggle{ display:inline-flex; }
+}
+
+/* Also ensure the desktop layout never wraps on larger screens */
+.main-nav{
+  display:flex; align-items:center; gap:16px; flex:1 1 auto; flex-wrap:nowrap;
+}
+.main-nav .menu{ display:flex; gap:22px; margin:0 auto; padding:0; list-style:none; }
+.main-nav .btn.donate{ margin-left:auto; flex:0 0 auto; white-space:nowrap; }
+
+/* iOS safe-area padding so header content doesn’t hide under the notch */
+@supports (padding: max(0px)){
+  .site-header{ padding-left: max(16px, env(safe-area-inset-left)); padding-right:max(16px, env(safe-area-inset-right)); }
+}
