@@ -787,3 +787,31 @@ body { cursor: auto !important; }
 @supports (padding: max(0px)){
   .site-header{ padding-left: max(16px, env(safe-area-inset-left)); padding-right:max(16px, env(safe-area-inset-right)); }
 }
+/* ===== MOBILE NAV FIX: show ONLY the drawer on phones ===== */
+@media (max-width: 860px){
+
+  /* Hide ALL inline/legacy menus inside the header */
+  .site-header .main-nav .menu,
+  .site-header .main-nav > a:not(.btn),  /* stray links that aren't the donate pill */
+  .site-header .nav,                     /* legacy .nav container */
+  .site-header nav.nav,
+  .site-header nav.nav a {
+    display: none !important;
+  }
+
+  /* Hide the desktop Donate pill on mobile (drawer has a donate link) */
+  .site-header .main-nav .btn.donate {
+    display: none !important;
+  }
+
+  /* Ensure the injected hamburger is visible and pushed to the right */
+  .nav-toggle {
+    display: inline-flex !important;
+    margin-left: auto;
+  }
+}
+
+/* Keep the drawer sitting below the sticky header on iOS */
+.drawer{
+  top: calc(env(safe-area-inset-top) + 56px);
+}
