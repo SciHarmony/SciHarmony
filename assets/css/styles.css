@@ -815,3 +815,85 @@ body { cursor: auto !important; }
 .drawer{
   top: calc(env(safe-area-inset-top) + 56px);
 }
+/* ================= DARK MODE MOBILE READABILITY PATCH ================= */
+
+/* Drawer panel: solid, high-contrast dark instead of foggy white */
+:root[data-theme="dark"] .drawer{
+  background: rgba(13,18,31,.94);
+  border-color:#1c2538;
+  color:#e6edf3;
+  backdrop-filter: none;              /* avoid milky look */
+  -webkit-backdrop-filter: none;
+}
+
+/* Drawer headings and links */
+:root[data-theme="dark"] .drawer .group{
+  color:#9aa9b6;                      /* section label */
+}
+:root[data-theme="dark"] .drawer a{
+  color:#e6edf3 !important;           /* readable links */
+  text-decoration:none;
+}
+:root[data-theme="dark"] .drawer a:hover{
+  background:#0b1220;                 /* subtle hover */
+  color:#5fd3aa !important;
+}
+
+/* Mobile toggle button also needs contrast in dark mode */
+:root[data-theme="dark"] .nav-toggle{
+  background:rgba(16,24,39,.92);
+  border-color:#1c2538;
+}
+:root[data-theme="dark"] .nav-toggle span,
+:root[data-theme="dark"] .nav-toggle span::before,
+:root[data-theme="dark"] .nav-toggle span::after{
+  background:#e6edf3;
+}
+
+/* Links inside drawer and elsewhere should use bright brand color in dark */
+:root[data-theme="dark"] a { color:#5fd3aa; }
+
+/* ================= FAQ / CARD READABILITY IN DARK ================= */
+
+/* If your FAQ uses .card (or anything that looks like a card), give it contrast */
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .tile,
+:root[data-theme="dark"] .qa-card,
+:root[data-theme="dark"] .faq-card{
+  background:#0f172a;
+  border-color:#1c2538;
+  color:#e6edf3;
+}
+
+/* Paragraphs and small text inside those cards */
+:root[data-theme="dark"] .card p,
+:root[data-theme="dark"] .tile p,
+:root[data-theme="dark"] .qa-card p,
+:root[data-theme="dark"] .faq-card p,
+:root[data-theme="dark"] .card li,
+:root[data-theme="dark"] .qa-card li,
+:root[data-theme="dark"] .faq-card li{
+  color:#cbd5e1;
+}
+
+/* Headings keep a bit more punch */
+:root[data-theme="dark"] .card h1,
+:root[data-theme="dark"] .card h2,
+:root[data-theme="dark"] .card h3,
+:root[data-theme="dark"] .qa-card h3,
+:root[data-theme="dark"] .faq-card h3{
+  color:#ffffff;
+}
+
+/* Buttons inside drawer/cards should stay readable */
+:root[data-theme="dark"] .btn{
+  background:#0f172a;
+  border-color:#1c2538;
+  color:#e6edf3;
+}
+:root[data-theme="dark"] .btn.primary,
+:root[data-theme="dark"] .btn.donate{
+  background:#20a075;
+  border-color:#20a075;
+  color:#fff !important;
+}
